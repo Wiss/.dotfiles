@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/wis/Documents/gnium/.git'
+let g:netrw_dirhist_7='/etc/init.d'
+let g:netrw_dirhist_6='/home/wis/Documents/robots_playground/docs/source'
+let g:netrw_dirhist_5='/home/wis/Documents/discord_bots'
+let g:netrw_dirhist_4='/home/wis/Documents/discord_bots/data'
+let g:netrw_dirhist_3='/home/wis/Documents/discord_bots'
+let g:netrw_dirhist_2='/home/wis/anaconda3/envs/w2nestml'
+let g:netrw_dirhist_1='/home/wis/Documents/robots_playground/src/config'
+let g:netrw_dirhist_0='/home/wis/Documents/robots_playground/src/utils'
+let g:netrw_dirhist_9='/home/wis/Documents/robots_playground/src/config'
