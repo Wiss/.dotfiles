@@ -50,8 +50,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(require 'package)
 
 ;; If you want to use last tagged version
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(package-initialize)
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+;;(package-initialize)
