@@ -108,34 +108,8 @@
         "* IDEA %?"))
 ))
 
-;;
-;; This is for org-ref
-(setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
-
-;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
-      org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-      org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
-
-(setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-      bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
-      bibtex-completion-notes-path "~/Dropbox/bibliography/bibtex-notes")
-
-;; open pdf with system pdf viewer (works on mac)
-(setq bibtex-completion-pdf-open-function
-  (lambda (fpath)
-    (start-process "open" "*open*" "open" fpath)))
-
-;; alternative
-;; (setq bibtex-completion-pdf-open-function 'org-open-file)
-
-;; Language tool: langtool
-;; (setq langtool-bin "usr/bin/languagetool")
-(require 'langtool)
-
 ;; wakatime
 (use-package wakatime-mode
   :ensure t)
-
 ;; enable for all buffers
 (global-wakatime-mode)
