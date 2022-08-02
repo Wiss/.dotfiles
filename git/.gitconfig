@@ -1,0 +1,18 @@
+[user]
+	email = is.jaras@gmail.com
+	name = Ismael Jaras
+[core]
+	excludesfile = ~/.gitignore_global
+[safe]
+	directory = /host/dir
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
