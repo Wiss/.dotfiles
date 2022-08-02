@@ -108,12 +108,6 @@
         "* IDEA %?"))
 ))
 
-;; wakatime
-(use-package wakatime-mode
-  :ensure t)
-;; enable for all buffers
-(global-wakatime-mode)
-
 
 ;; custom company config
 (setq company-minimum-prefix-length 1
@@ -150,3 +144,10 @@
     company-dabbrev-ignore-case nil
     company-dabbrev-downcase nil
     company-idle-delay 0)  ; No delay in showing suggestions
+
+
+;; wakatime
+(use-package wakatime-mode
+  :ensure t)
+;; enable for all buffers
+(global-wakatime-mode)
