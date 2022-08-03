@@ -38,6 +38,9 @@
 (setq-default display-fill-column-indicator-column 79) ; 80 column indicator - Emacs columns are 0-based...
 (global-display-fill-column-indicator-mode 1)
 
+;; autosave
+(setq auto-save-default t
+      make-backup-files t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
