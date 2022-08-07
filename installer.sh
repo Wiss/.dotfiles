@@ -4,14 +4,19 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
 # bashrc
-ln -vs ${BASEDIR}/bash/.bashrc ~/.bashrc
+ln -vs ${BASEDIR}/.dotfiles/bash/.bashrc ${BASEDIR}/.bashrc
 
 # vim
-ln -vs ${BASEDIR}/vim/.vimrc ~/.vimrc
-ln -vs ${BASEDIR}/vim/.vim ~/.vim
+ln -vs ${BASEDIR}/.dotfiles/vim/.vimrc ${BASEDIR}/.vimrc
+ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 
 # doom
-ln -vs ${BASEDIR}/doom/.doom.d ~/.doom.d
+# Remeber: 
+# 1. Install emacs
+# 2. clone doom repository 
+# 3. doom install 
+# link files here
+ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.doom.d
 
 # git
-ln -vs ${BASEDIR}/git/.gitconfig ~/.gitconfig
+ln -vs ${BASEDIR}/.dotfiles/git/.gitconfig ${BASEDIR}/.gitconfig
