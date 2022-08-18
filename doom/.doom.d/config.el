@@ -60,11 +60,9 @@
 ;; they are implemented.
 
 ;;To scan the org directory for dates and tags
-(after! org
-  (setq org-directory "~/Documents/org/")
-  (setq org-agenda-files (list org-directory))
-  (setq org-agenda-dim-blocked-tasks t)
-  )
+(setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
+                         "~/Documents/org/gtd/gtd.org"
+                         "~/Documents/org/gtd/tickler.org"))
 
 ;; Keybindings from Org Manual
 (global-set-key (kbd "C-c l") 'org-store-link)
