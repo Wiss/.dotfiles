@@ -42,6 +42,10 @@
 (setq auto-save-default t
       make-backup-files t)
 
+;; start files in overview view
+(setq org-startup-folded t)
+
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -172,9 +176,6 @@
 ;; log time for each task C-c C-x C-i (clocl in)
 ;; C-c C-x C-o (clock out)
 (setq org-log-done 'time)
-
-;; start files in overview view
-(setq org-startup-folded t)
 
 ;; custom company config
 (setq company-minimum-prefix-length 1
