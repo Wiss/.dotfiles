@@ -61,7 +61,7 @@
 
 ;;To scan the org directory for dates and tags
 (setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
-                         "~/Documents/org/gtd/gtd.org"
+                         "~/Documents/org/gtd/projects.org"
                          "~/Documents/org/gtd/tickler.org"))
 
 ;; Keybindings from Org Manual
@@ -72,43 +72,109 @@
 
 ;; org-capture templates
 ;; with the specifier %i you will copy and paste all the highlited text in the tempalte
+;; syntaxis https://orgmode.org/manual/Template-expansion.html
 (after! org
 (setq org-capture-templates
-      '(("d" "Demo template" entry
-         (file+headline "demo.org" "Our first heading")
-         "* DEMO TEXT %?")
-      ("p" "Prompt us for input" entry
-        (file+headline "demo.org" "Our First heading")
-        "* %^{Please write here} %?")
-      ("o" "Options in prompt" entry
-        (file+headline "demo.org" "Our Second heading")
-        "* %^{Selet yout option|ONE|TWO|THREE} %?")
-      ("r" "Task with date" entry
-        (file+headline "demo.org" "Scheduled tasks")
-        "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
-      ("a" "A random template")
-       ("at" "Submenu option T" entry
-        (file+headline "demo.org" "Scheduled tasks")
-        "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
-        ("aa" "Submenu option A" entry
-        (file+headline "demo.org" "Scheduled tasks")
-        "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
+     ;'(("d" "Demo template" entry
+     ;    (file+headline "demo.org" "Our first heading")
+     ;    "* DEMO TEXT %?")
+     ; ("p" "Prompt us for input" entry
+     ;   (file+headline "demo.org" "Our First heading")
+     ;   "* %^{Please write here} %?")
+     ; ("o" "Options in prompt" entry
+     ;   (file+headline "demo.org" "Our Second heading")
+     ;   "* %^{Selet yout option|ONE|TWO|THREE} %?")
+     ; ("r" "Task with date" entry
+     ;   (file+headline "demo.org" "Scheduled tasks")
+     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
+     ; ("a" "A random template")
+     ;  ("at" "Submenu option T" entry
+     ;   (file+headline "demo.org" "Scheduled tasks")
+     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
+     ;   ("aa" "Submenu option A" entry
+     ;   (file+headline "demo.org" "Scheduled tasks")
+     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
 
-        ("t" "Task to do")
-        ("td" "With deadline" entry
-         (file+headline "general_todos.org" "To-Do with deadline")
-         "* TODO %?\n DEADLINE %^t")
-        ("ts" "With schedule" entry
-         (file+headline "general_todos.org" "To-Do with schedule")
-         "* TODO %?\n SCHEDULE %^t")
-        ("to" "Without deadline" entry
-         (file+headline "general_todos.org" "To-Do")
-         "* TODO %?")
-      ("i" "Idea" entry
-       (file+headline "idea.org" "Idea")
-        "* IDEA %?"))
+     ;   ("t" "Task to do")
+     ;   ("td" "With deadline" entry
+     ;    (file+headline "~/Documents/org/gtd/inbox.org" "To-Do with deadline")
+     ;    "* TODO %?\n DEADLINE %^t")
+     ;   ("ts" "With schedule" entry
+     ;    (file+headline "general_todos.org" "To-Do with schedule")
+     ;    "* TODO %?\n SCHEDULE %^t")
+     ;   ("to" "Without deadline" entry
+     ;    (file+headline "general_todos.org" "To-Do")
+     ;    "* TODO %?")
+     ; ("i" "Idea" entry
+     ;  (file+headline "idea.org" "Idea")
+     ;   "* IDEA %?")
+      ;; GTD
+      '(("t" "Todo [inbox]" entry
+        (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
+        "* TODO %i%? \n /Entered on: %U/")
+      ("T" "Tickler" entry
+        (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
+        "* %i%? \n /Entered on: %U/ ")
+      ("n" "Note" entry
+        (file+headline "~/Documents/org/gtd/notes.org" "Notes")
+        "* NOTE (%a)\n /Entered on/ %U\n" "\n" "%?"))
 ))
+;; key-bind reminder
+;; C-c c < capture
+;; C-c C-w < refile
+;; C-c C-c (headline) < creates tag
+;; C-c C-t (headline) < binds todo keyword
+;; C-c C-s < schedules
+;; C-c C-d < deadline
 
+;; refile for GTD
+(setq org-refile-targets '(("~/Documents/org/gtd/projects.org" :maxlevel . 3)
+                           ("~/Documents/org/gtd/someday.org" :level . 1)
+                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
+;; more todo keywords for GTD
+(after! org
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+      ))
+
+;; create activated keyword
+(defun log-todo-next-creation-date (&rest ignore)
+  "Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
+  (when (and (string= (org-get-todo-state) "NEXT")
+             (not (org-entry-get nil "ACTIVATED")))
+    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+(setq org-agenda-custom-commands
+      '(("g" "Get Things Done (GTD)"
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo "NEXT"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nTasks\n")))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date "")
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
+                   (org-agenda-overriding-header "\nDeadlines")))
+          (tags-todo "inbox"
+                     ((org-agenda-prefix-format "  %?-12t% s")
+                      (org-agenda-overriding-header "\nInbox\n")))
+          (tags "CLOSED>=\"<today>\""
+                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+
+;; log time for each task C-c C-x C-i (clocl in)
+;; C-c C-x C-o (clock out)
+(setq org-log-done 'time)
+
+;; start files in overview view
+(setq org-startup-folded t)
 
 ;; custom company config
 (setq company-minimum-prefix-length 1
