@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Ismael Jaras"
-      user-mail-address "is.jaras@gmail.com")
+user-mail-address "is.jaras@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -40,7 +40,7 @@
 
 ;; autosave
 (setq auto-save-default t
-      make-backup-files t)
+make-backup-files t)
 
 ;; start files in overview view
 (setq org-startup-folded t)
@@ -66,7 +66,8 @@
 ;;To scan the org directory for dates and tags
 (setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
                          "~/Documents/org/gtd/projects.org"
-                         "~/Documents/org/gtd/tickler.org"))
+                         "~/Documents/org/gtd/tickler.org"
+                         "~/Documents/org/gtd/calendar.org"))
 
 ;; Keybindings from Org Manual
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -121,9 +122,12 @@
         "* %i%? \n /Entered on: %U/ ")
       ("n" "Note" entry
         (file+headline "~/Documents/org/gtd/notes.org" "Notes")
-        "* NOTE (%a)\n /Entered on/ %U\n" "\n" "%?"))
+        "* NOTE (%a)\n %i%? /Entered on/ %U\n" "\n" "%?")
+      ("e" "Event" entry
+        (file+headline "~/Documents/org/gtd/calendar.org" "Future")
+        "* %? :meeting:\n %^T"))
 ))
-;; key-bind reminder
+;; Key-bind reminder
 ;; C-c c < capture
 ;; C-c C-w < refile
 ;; C-c C-c (headline) < creates tag
@@ -134,7 +138,8 @@
 ;; refile for GTD
 (setq org-refile-targets '(("~/Documents/org/gtd/projects.org" :maxlevel . 3)
                            ("~/Documents/org/gtd/someday.org" :level . 1)
-                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
+                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)
+                           ("~/Documents/org/gtd/calendar.org" :maxlevel . 2)))
 ;; more todo keywords for GTD
 (after! org
 (setq org-todo-keywords
