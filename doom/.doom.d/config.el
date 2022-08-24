@@ -119,13 +119,13 @@ make-backup-files t)
         "* TODO %i%? \n /Entered on: %U/")
       ("T" "Tickler" entry
         (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
-        "* %i%? \n /Entered on: %U/ ")
+        "* %i%? \n /Entered on: %U/")
       ("n" "Note" entry
         (file+headline "~/Documents/org/gtd/notes.org" "Notes")
-        "* NOTE (%a)\n %i%? /Entered on/ %U\n" "\n" "%?")
+        "* NOTE (%a)\n %i%? \n /Entered on/ %U")
       ("e" "Event" entry
         (file+headline "~/Documents/org/gtd/calendar.org" "Future")
-        "* %? :meeting:\n %^T"))
+        "* %i%? :meeting:\n %^T"))
 ))
 ;; Key-bind reminder
 ;; C-c c < capture
