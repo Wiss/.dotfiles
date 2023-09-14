@@ -137,7 +137,7 @@ make-backup-files t)
 
 ;; refile for GTD
 (setq org-refile-targets '(("~/Documents/org/gtd/projects.org" :maxlevel . 3)
-                           ("~/Documents/org/gtd/someday.org" :level . 1)
+                           ("~/Documents/org/gtd/someday.org" :level . 2)
                            ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)
                            ("~/Documents/org/gtd/calendar.org" :maxlevel . 2)))
 ;; more todo keywords for GTD
@@ -218,6 +218,10 @@ make-backup-files t)
     company-dabbrev-downcase nil
     company-idle-delay 0)  ; No delay in showing suggestions
 
+;; package templates
+(set-file-template! "/project_\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
+(set-file-template! "/in\\.org$" :trigger "__invoice.org" :mode 'org-mode)
+;;(set-file-template! "/project_*\.org$" :trigger "__project_custom.org" :mode 'org-mode)
 
 ;; wakatime
 (use-package wakatime-mode
