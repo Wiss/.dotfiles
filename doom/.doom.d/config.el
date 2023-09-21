@@ -46,6 +46,10 @@ make-backup-files t)
 (setq org-startup-folded t)
 
 
+;; enable org-modern-mode
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -137,7 +141,7 @@ make-backup-files t)
 
 ;; refile for GTD
 (setq org-refile-targets '(("~/Documents/org/gtd/projects.org" :maxlevel . 3)
-                           ("~/Documents/org/gtd/someday.org" :level . 2)
+                           ("~/Documents/org/gtd/someday.org" :maxlevel . 2)
                            ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)
                            ("~/Documents/org/gtd/calendar.org" :maxlevel . 2)))
 ;; more todo keywords for GTD
@@ -178,7 +182,7 @@ make-backup-files t)
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today\n")))))))
 
-;; log time for each task C-c C-x C-i (clocl in)
+;; log time for each task C-c C-x C-i (clock in)
 ;; C-c C-x C-o (clock out)
 (setq org-log-done 'time)
 
