@@ -232,3 +232,9 @@ make-backup-files t)
   :ensure t)
 ;; enable for all buffers
 (global-wakatime-mode)
+
+;; pdf-tools
+(use-package pdf-tools
+  :ensure t
+  :init
+  (pdf-tools-install))
