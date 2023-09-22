@@ -156,7 +156,8 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +peek +pyright)       ; beautiful is better than ugly
+       (python +lsp +pyright)       ; beautiful is better than ugly
+       ;; for using pyright you need to install it using pip
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
