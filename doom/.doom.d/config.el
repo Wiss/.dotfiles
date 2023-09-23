@@ -108,7 +108,9 @@
 ;; C-c C-d < deadline
 
 ;; refile for GTD
-(setq org-refile-targets (list org_directory org_notes))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+;; allows creating parent path
+(setq org-refile-allow-creating-parent-nodes 'confirm)
 
 ;; more todo keywords for GTD
 (after! org
