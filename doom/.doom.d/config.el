@@ -227,7 +227,7 @@
 ;; package templates
 ;; FIX
 ;; /project_[a-zA-Z0-9_]+\.org$
-(set-file-template! "/project_\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
+(set-file-template! "/project_.+\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
 (set-file-template! "/in_\\.org$" :trigger "__invoice.org" :mode 'org-mode)
 ;;(set-file-template! "/project_*+\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
 
