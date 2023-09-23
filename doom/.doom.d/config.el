@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Ismael Jaras"
-user-mail-address "is.jaras@gmail.com")
+      user-mail-address "is.jaras@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -27,28 +27,35 @@ user-mail-address "is.jaras@gmail.com")
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
+;; Variables
+(setq zot_bib (concat (getenv "HOME") "/Documents/org/zotLib.bib")
+      org_directory (concat (getenv "HOME") "/Documents/org/")
+      org_notes (list org_directory)
+      org_gtd (concat (getenv "HOME") "/Documents/org/gtd/")
+      org_journal (concat (getenv "HOME") "/Documents/org/journal/")
+      org_roam (concat (getenv "HOME") "/Documents/org/roam/")
+      org-directory org_directory
+      org-agenda-files (list org_directory org_gtd))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-;; start display-fill-column
-(setq-default display-fill-column-indicator-column 79) ; 80 column indicator - Emacs columns are 0-based...
-(global-display-fill-column-indicator-mode 1)
+(setq display-line-numbers-type t
+      display-fill-column-indicator-column 79 ; 80 column indicator - Emacs columns are 0-based...
+      global-display-fill-column-indicator-mode 1)
 
 ;; autosave
 (setq auto-save-default t
-make-backup-files t)
+      make-backup-files t)
 
 ;; start files in overview view
 (setq org-startup-folded t)
 
-
 ;; enable org-modern-mode
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+;; enable lsp display hierarchy
+(setq lsp-headerline-breadcrumb-enable t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -67,12 +74,6 @@ make-backup-files t)
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;To scan the org directory for dates and tags
-(setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
-                         "~/Documents/org/gtd/projects.org"
-                         "~/Documents/org/gtd/tickler.org"
-                         "~/Documents/org/gtd/calendar.org"))
-
 ;; Keybindings from Org Manual
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -84,39 +85,6 @@ make-backup-files t)
 ;; syntaxis https://orgmode.org/manual/Template-expansion.html
 (after! org
 (setq org-capture-templates
-     ;'(("d" "Demo template" entry
-     ;    (file+headline "demo.org" "Our first heading")
-     ;    "* DEMO TEXT %?")
-     ; ("p" "Prompt us for input" entry
-     ;   (file+headline "demo.org" "Our First heading")
-     ;   "* %^{Please write here} %?")
-     ; ("o" "Options in prompt" entry
-     ;   (file+headline "demo.org" "Our Second heading")
-     ;   "* %^{Selet yout option|ONE|TWO|THREE} %?")
-     ; ("r" "Task with date" entry
-     ;   (file+headline "demo.org" "Scheduled tasks")
-     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
-     ; ("a" "A random template")
-     ;  ("at" "Submenu option T" entry
-     ;   (file+headline "demo.org" "Scheduled tasks")
-     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
-     ;   ("aa" "Submenu option A" entry
-     ;   (file+headline "demo.org" "Scheduled tasks")
-     ;   "* %^{Selet yout option|ONE|TWO|THREE}\n SCHEDULE: %^t\n Some extra text %?")
-
-     ;   ("t" "Task to do")
-     ;   ("td" "With deadline" entry
-     ;    (file+headline "~/Documents/org/gtd/inbox.org" "To-Do with deadline")
-     ;    "* TODO %?\n DEADLINE %^t")
-     ;   ("ts" "With schedule" entry
-     ;    (file+headline "general_todos.org" "To-Do with schedule")
-     ;    "* TODO %?\n SCHEDULE %^t")
-     ;   ("to" "Without deadline" entry
-     ;    (file+headline "general_todos.org" "To-Do")
-     ;    "* TODO %?")
-     ; ("i" "Idea" entry
-     ;  (file+headline "idea.org" "Idea")
-     ;   "* IDEA %?")
       ;; GTD
       '(("t" "Todo [inbox]" entry
         (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
@@ -140,10 +108,8 @@ make-backup-files t)
 ;; C-c C-d < deadline
 
 ;; refile for GTD
-(setq org-refile-targets '(("~/Documents/org/gtd/projects.org" :maxlevel . 3)
-                           ("~/Documents/org/gtd/someday.org" :maxlevel . 2)
-                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)
-                           ("~/Documents/org/gtd/calendar.org" :maxlevel . 2)))
+(setq org-refile-targets (list org_directory org_notes))
+
 ;; more todo keywords for GTD
 (after! org
 (setq org-todo-keywords
@@ -186,6 +152,40 @@ make-backup-files t)
 ;; C-c C-x C-o (clock out)
 (setq org-log-done 'time)
 
+;; journal and roam
+(setq org-roam-directory org_roam
+      org-roam-dailies-directory org_journal
+      org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* %?"
+         :target (file+head "%<%Y-%m-%d>.org"
+                            "#+title: %<%Y-%m-%d>\n"))))
+;; journal keybinding
+(global-set-key (kbd "C-c j i") 'org-journal-new-entry)
+;; roam notes keybinding
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+
+;; citar
+(setq! citar-bibliography zot_bib);'("~/braindump/zotLib.bib"))
+(setq! citar-notes-paths org_notes);'("~/braindump/notes/"))
+(setq! citar-symbols
+      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+        (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+        (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+(setq! citar-symbol-separator "  ")
+
+;; Bibtex
+(use-package org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config
+  (setq orb-preformat-keywords
+        '("citekey" "title" "url" "author-or-editor" "keywords" "file")
+        orb-process-file-keyword t
+        orb-attached-file-extensions '("pdf")))
+
 ;; custom company config
 (setq company-minimum-prefix-length 1
     company-tooltip-limit 4
@@ -223,9 +223,11 @@ make-backup-files t)
     company-idle-delay 0)  ; No delay in showing suggestions
 
 ;; package templates
+;; FIX
+;; /project_[a-zA-Z0-9_]+\.org$
 (set-file-template! "/project_\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
-(set-file-template! "/in\\.org$" :trigger "__invoice.org" :mode 'org-mode)
-;;(set-file-template! "/project_*\.org$" :trigger "__project_custom.org" :mode 'org-mode)
+(set-file-template! "/in_\\.org$" :trigger "__invoice.org" :mode 'org-mode)
+;;(set-file-template! "/project_*+\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
 
 ;; wakatime
 (use-package wakatime-mode
