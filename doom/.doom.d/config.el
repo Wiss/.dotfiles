@@ -169,24 +169,15 @@
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)
 (global-set-key (kbd "C-c n i") 'org-roam-node-insert)
 
-;; citar
-(setq! citar-bibliography zot_bib);'("~/braindump/zotLib.bib"))
-(setq! citar-notes-paths org_notes);'("~/braindump/notes/"))
-(setq! citar-symbols
-      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
-        (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
-        (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
-(setq! citar-symbol-separator "  ")
-
 ;; Bibtex
-(use-package org-roam-bibtex
-  :after org-roam
-  :hook (org-roam-mode . org-roam-bibtex-mode)
-  :config
-  (setq orb-preformat-keywords
-        '("citekey" "title" "url" "author-or-editor" "keywords" "file")
-        orb-process-file-keyword t
-        orb-attached-file-extensions '("pdf")))
+;;(use-package org-roam-bibtex
+;;  :after org-roam
+;;  :hook (org-roam-mode . org-roam-bibtex-mode)
+;;  :config
+;;  (setq orb-preformat-keywords
+;;        '("citekey" "title" "url" "author-or-editor" "keywords" "file")
+;;        orb-process-file-keyword t
+;;        orb-attached-file-extensions '("pdf")))
 
 ;; custom company config
 (setq company-minimum-prefix-length 1
