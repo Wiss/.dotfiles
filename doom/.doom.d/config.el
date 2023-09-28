@@ -35,7 +35,7 @@
       org_journal (concat (getenv "HOME") "/Documents/org/journal/")
       org_roam (concat (getenv "HOME") "/Documents/org/roam/")
       org-directory org_directory
-      org-agenda-files (list org_directory org_gtd))
+      org-agenda-files (list org_directory org_gtd org_roam))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
