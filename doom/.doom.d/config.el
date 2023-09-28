@@ -115,7 +115,7 @@
 ;; more todo keywords for GTD
 (after! org
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+      '((sequence "TODO(t)" "NEXT(n)" "WIP(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
       ))
 
 ;; create activated keyword
@@ -126,33 +126,98 @@
     (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
 (add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
 
+;;(setq org-agenda-custom-commands
 (setq org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
-         ((agenda ""
+         ((agenda "*"
                   ((org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'deadline))
                    (org-deadline-warning-days 0)))
-          (todo "NEXT"
+          (todo "NEXT|WIP"
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
-                 (org-agenda-overriding-header "\nTasks\n")))
-          (agenda nil
+                 (org-agenda-overriding-header "Tasks\n")))
+          (agenda ""
                   ((org-agenda-entry-types '(:deadline))
-                   (org-agenda-format-date "")
-                   (org-deadline-warning-days 7)
+                   (org-agenda-span 10)
+                   (org-agenda-show-all-dates nil)
+                 (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
+                   (org-deadline-warning-days 0)
                    (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
-                   (org-agenda-overriding-header "\nDeadlines")))
-          (tags-todo "inbox"
+                    '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "Deadlines\n")))
+          (agenda ""
+                  ((org-agenda-entry-types '(:scheduled))
+                   (org-agenda-span 30)
+                   (org-agenda-show-all-dates nil)
+                 (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
+                   (org-deadline-warning-days 0)
+                   (org-agenda-overriding-header "Scheduled\n")))
+          (todo "WAITING"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Waiting tasks\n")))
+          (tags-todo "Inbox"
                      ((org-agenda-prefix-format "  %?-12t% s")
-                      (org-agenda-overriding-header "\nInbox\n")))
+                      (org-agenda-overriding-header "Inbox\n")))
           (tags "CLOSED>=\"<today>\""
-                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+                ((org-agenda-overriding-header "Completed today\n")))))
+      ("A" "Daily agenda and top priority tasks"
+         ((tags-todo "*"
+                     ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
+                      (org-agenda-skip-function
+                       `(org-agenda-skip-entry-if
+                         'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
+                      (org-agenda-block-separator nil)
+                      (org-agenda-overriding-header "Important tasks without a date\n")))
+          (agenda "" ((org-agenda-span 1)
+                      (org-deadline-warning-days 0)
+                      (org-scheduled-past-days 0)
+                      ;; We don't need the `org-agenda-date-today'
+                      ;; highlight because that only has a practical
+                      ;; utility in multi-day views.
+                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                      (org-agenda-format-date "%A %-e %B %Y")
+                      (org-agenda-overriding-header "\nToday's agenda\n")))
+          (agenda "" ((org-agenda-start-on-weekday nil)
+                      (org-agenda-start-day "+1d")
+                      (org-agenda-span 3)
+                      (org-deadline-warning-days 0)
+                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                      (org-agenda-overriding-header "\nNext three days\n")))
+          (agenda "" ((org-agenda-time-grid nil)
+                      (org-agenda-start-on-weekday nil)
+                      ;; We don't want to replicate the previous section's
+                      ;; three days, so we start counting from the day after.
+                      (org-agenda-start-day "+4d")
+                      (org-agenda-span 14)
+                      (org-agenda-show-all-dates nil)
+                      (org-deadline-warning-days 0)
+                      (org-agenda-entry-types '(:deadline))
+                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                      (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))))
 
 ;; log time for each task C-c C-x C-i (clock in)
 ;; C-c C-x C-o (clock out)
 (setq org-log-done 'time)
+
+
+;; citar
+(setq! citar-bibliography zot_bib) ;;'("~/braindump/zotLib.bib"))
+(setq! citar-notes-paths (list org_roam)) ;;'("~/braindump/notes/"))
+;;(setq! citar-symbols
+;;      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+;;        (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+;;        (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+(setq! citar-symbol-separator "  ")
+(add-hook 'LaTeX-mode #'citar-capf-setup)
+(add-hook 'org-mode #'citar-capf-setup)
+
+(global-set-key (kbd "C-c s") 'citar-open)
 
 ;; journal and roam
 (setq org-roam-directory org_roam
