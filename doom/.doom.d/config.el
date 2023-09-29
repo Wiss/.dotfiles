@@ -30,12 +30,13 @@
 ;; Variables
 (setq zot_bib (concat (getenv "HOME") "/Documents/org/zotLib.bib")
       org_directory (concat (getenv "HOME") "/Documents/org/")
-      org_notes (list org_directory)
+      org_projects (concat (getenv "HOME") "/Documents/org/projects/")
+      org_notes (list org_projects)
       org_gtd (concat (getenv "HOME") "/Documents/org/gtd/")
       org_journal (concat (getenv "HOME") "/Documents/org/journal/")
       org_roam (concat (getenv "HOME") "/Documents/org/roam/")
       org-directory org_directory
-      org-agenda-files (list org_directory org_gtd org_roam))
+      org-agenda-files (list org_directory org_gtd org_roam org_projects))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
