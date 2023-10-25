@@ -28,15 +28,21 @@
 (setq doom-theme 'doom-one)
 
 ;; Variables
-(setq zot_bib (concat (getenv "HOME") "/Documents/org/zotLib.bib")
-      org_directory (concat (getenv "HOME") "/Documents/org/")
-      org_projects (concat (getenv "HOME") "/Documents/org/projects/")
-      org_notes (list org_projects)
-      org_gtd (concat (getenv "HOME") "/Documents/org/gtd/")
-      org_journal (concat (getenv "HOME") "/Documents/org/journal/")
-      org_roam (concat (getenv "HOME") "/Documents/org/roam/")
+(setq
+      org_directory (file-name-concat (getenv "HOME") "Documents/braindump")
       org-directory org_directory
-      org-agenda-files (list org_directory org_gtd org_roam org_projects))
+      org_projects (directory-files-recursively
+                         (file-name-concat org-directory "projects") "\\.org$")
+      ;;org_notes (list org_projects)
+      org_gtd (file-name-concat org-directory "gtd")
+      org_journal (file-name-concat org-directory "journal")
+      org_roam (file-name-concat org-directory "roam")
+      org-roam-directory org_roam
+      org_roam_ids (file-name-concat org_roam ".orgids")
+      org-id-locations-file org_roam_ids
+      zot_bib (file-name-concat org-directory "zotLib.bib")
+      ;org-agenda-files (list org_notes org_gtd org_journal org_roam ))
+      org-agenda-files (directory-files-recursively org-directory "\\.org$"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -88,16 +94,16 @@
 (setq org-capture-templates
       ;; GTD
       '(("t" "Todo [inbox]" entry
-        (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
+        (file+headline "~/Documents/braindump/gtd/inbox.org" "Tasks")
         "* TODO %i%?\n/Entered on: %U/")
       ("T" "Tickler" entry
-        (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
+        (file+headline "~/Documents/braindump/gtd/tickler.org" "Tickler")
         "* %i%?\n/Entered on: %U/")
       ("n" "Note" entry
-        (file+headline "~/Documents/org/gtd/notes.org" "Notes")
+        (file+headline "~/Documents/braindump/gtd/notes.org" "Notes")
         "* NOTE (%a)\n%i%?\n/Entered on/ %U")
       ("e" "Event" entry
-        (file+headline "~/Documents/org/gtd/calendar.org" "Future")
+        (file+headline "~/Documents/braindump/gtd/calendar.org" "Future")
         "* %i%? :meeting:\n%^T"))
 ))
 ;; Key-bind reminder
@@ -133,6 +139,8 @@
          ((agenda "*"
                   ((org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'deadline))
+                   (org-agenda-start-day nil)
+                   (org-agenda-span 5)
                    (org-deadline-warning-days 0)))
           (todo "NEXT|WIP"
                 ((org-agenda-skip-function
@@ -143,7 +151,7 @@
                   ((org-agenda-entry-types '(:deadline))
                    (org-agenda-span 10)
                    (org-agenda-show-all-dates nil)
-                 (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
+                   (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
                    (org-deadline-warning-days 0)
                    (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo 'done))
@@ -152,14 +160,14 @@
                   ((org-agenda-entry-types '(:scheduled))
                    (org-agenda-span 30)
                    (org-agenda-show-all-dates nil)
-                 (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
+                   (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
                    (org-deadline-warning-days 0)
                    (org-agenda-overriding-header "Scheduled\n")))
           (todo "WAITING"
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
-                   (org-agenda-skip-function
+                 (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "Waiting tasks\n")))
           (tags-todo "Inbox"
@@ -175,7 +183,9 @@
                          'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
                       (org-agenda-block-separator nil)
                       (org-agenda-overriding-header "Important tasks without a date\n")))
-          (agenda "" ((org-agenda-span 1)
+          (agenda "" (;(org-agenda-start-day "+0d")
+                      (org-agenda-start-day nil)
+                      (org-agenda-span 1)
                       (org-deadline-warning-days 0)
                       (org-scheduled-past-days 0)
                       ;; We don't need the `org-agenda-date-today'
