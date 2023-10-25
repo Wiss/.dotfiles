@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-BASEDIR="$(cd "$(dirname "${0}")" && pwd)"
+# this script shoud be execute where the original config files are located
+BASEDIR=$(pwd)
 
 # bashrc
 ln -vs ${BASEDIR}/.dotfiles/bash/.bashrc ${BASEDIR}/.bashrc
