@@ -309,3 +309,15 @@
   :ensure t
   :init
   (pdf-tools-install))
+
+; If we are workig on a machine with macOS
+(if IS-MAC
+(when (fboundp 'mac-auto-operator-composition-mode)
+(setq   (mac-auto-operator-composition-mode t)
+        doom-font (font-spec :family "Fira Code" :size 13)
+        doom-unicode-font (font-spec :family "Fira Mono" :size 13)
+        doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13)
+        global-prettify-symbols-mode nil)
+;; pretty-symbols are not working. This should be fixed!
+)
+)
