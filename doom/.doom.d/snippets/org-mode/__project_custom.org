@@ -1,0 +1,109 @@
+#+title: ${1:`
+(string-join
+ (mapcar #'capitalize
+         ;; Replace -,_... with space
+         (split-string
+          (let (case-fold-search)
+            ;; Seperating lower from upper: hello|World
+            (replace-regexp-in-string
+             "\\([[:lower:]]\\)\\([[:upper:]]\\)" "\\1 \\2"
+             ;; Separating upper from (upper and lower): HTTP|Server
+             (replace-regexp-in-string "\\([[:upper:]]\\)\\([[:upper:]][0-9[:lower:]]\\)"
+                                       "\\1 \\2" (file-name-base buffer-file-name))))
+          "[^[:word:]0-9]+"
+          )) " " )
+`}
+#+date:    `(format-time-string "%Y-%m-%d")`
+#+author: Ismael Jaras
+#+startup: overview
+
+$0
+
+* Tasks [/]
+* Timeframe
+* Notes
+* Ideas
+* Questions
+* General time report
+** today
+#+BEGIN: clocktable :scope file :block today
+#+CAPTION: Clock summary at [2023-09-23 Sa 13:35], for Samstag, September 23, 2023.
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+END:
+** daily last week
+#+BEGIN: clocktable :scope file :step day :block thisweek
+
+Daily report: [2023-09-18 Mo]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-19 Di]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-20 Mi]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-21 Do]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-22 Fr]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-23 Sa]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Daily report: [2023-09-24 So]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+END:
+
+** weekly last month
+#+BEGIN: clocktable :scope file :step week :block thismonth
+
+Weekly report starting on: [2023-09-01 Fr]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Weekly report starting on: [2023-09-04 Mo]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Weekly report starting on: [2023-09-11 Mo]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Weekly report starting on: [2023-09-18 Mo]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+
+Weekly report starting on: [2023-09-25 Mo]
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+END:
+
+** Historic
+#+BEGIN: clocktable :scope file :block untilnow
+#+CAPTION: Clock summary at [2023-09-23 Sa 13:35], for now.
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+END:
