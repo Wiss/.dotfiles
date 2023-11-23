@@ -37,7 +37,7 @@
       org_gtd (file-name-concat org-directory "gtd")
       org_journal (file-name-concat org-directory "journal")
       org_roam (file-name-concat org-directory "roam")
-      org-roam-directory org_roam
+      org-roam-directory org-directory ;;org_roam
       org_roam_ids (file-name-concat org_roam ".orgids")
       org-id-locations-file org_roam_ids
       zot_bib (file-name-concat org-directory "zotLib.bib")
@@ -231,8 +231,7 @@
 (global-set-key (kbd "C-c s") 'citar-open)
 
 ;; journal and roam
-(setq org-roam-directory org_roam
-      org-roam-dailies-directory org_journal
+(setq org-roam-dailies-directory org_journal
       org-roam-dailies-capture-templates
       '(("d" "default" entry
          "* %?"
