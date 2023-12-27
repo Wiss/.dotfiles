@@ -12,14 +12,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # doom path
 #export PATH="$HOME/.emacs.d/bin:$PATH"
-#export PATH="$HOME/.config/emacs/bin:$PATH"
-#export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # Alias for emacs
 #alias emacs='sh $(brew --prefix)/opt/emacs-plus@28/Emacs.app/Contents/MacOS/Emacs.sh "$@"'
 #alias emacs='sh $(brew --prefix)/opt/homebrew/Cellar/emacs-plus@28/28.2/Emacs.app
 #/opt/emacs-plus@28/Emacs.app/Contents/MacOS/Emacs.sh "$@"'
 #alias emacs='sh /Applications/Emacs.app "@"'
+alias emacs='open /Applications/Emacs.app'
 
 #  python path
 export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
