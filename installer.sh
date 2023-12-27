@@ -4,11 +4,11 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
 # bashrc
-[ -d "${BASEDIR}/.bashrc" ] && rm -r "${BASEDIR}/.bashrc"
+[ -f "${BASEDIR}/.bashrc" ] && rm "${BASEDIR}/.bashrc"
 ln -vs ${BASEDIR}/.dotfiles/bash/.bashrc ${BASEDIR}/.bashrc
 
 # vim
-[ -d "${BASEDIR}/.vimrc" ] && rm -r "${BASEDIR}/.vimrc"
+[ -f "${BASEDIR}/.vimrc" ] && rm "${BASEDIR}/.vimrc"
 ln -vs ${BASEDIR}/.dotfiles/vim/.vimrc ${BASEDIR}/.vimrc
 [ -d "${BASEDIR}/.vim" ] && rm -r "${BASEDIR}/.vim"
 ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
@@ -23,5 +23,5 @@ ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.doom.d
 
 # git
-[ -d "${BASEDIR}/.gitconfig" ] && rm -r "${BASEDIR}/.gitconfig"
+[ -f "${BASEDIR}/.gitconfig" ] && rm "${BASEDIR}/.gitconfig"
 ln -vs ${BASEDIR}/.dotfiles/git/.gitconfig ${BASEDIR}/.gitconfig

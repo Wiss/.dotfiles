@@ -4,11 +4,17 @@
 BASEDIR=$(pwd)
 
 # bashrc
-[ -d "${BASEDIR}/.bashrc" ] && rm -r "${BASEDIR}/.bashrc" 
+[ -f "${BASEDIR}/.bashrc" ] && rm "${BASEDIR}/.bashrc" 
 ln -vs ${BASEDIR}/.dotfiles/bash/.bashrc ${BASEDIR}/.bashrc
 
+# zshrc
+[ -f "${BASEDIR}/.zshrc" ] && rm "${BASEDIR}/.zshrc" 
+ln -vs ${BASEDIR}/.dotfiles/zsh/.zshrc ${BASEDIR}/.zshrc
+[ -f "${BASEDIR}/.zprofile" ] && rm "${BASEDIR}/.zprofile" 
+ln -vs ${BASEDIR}/.dotfiles/zsh/.zprofile ${BASEDIR}/.zprofile
+
 # vim
-[ -d "${BASEDIR}/.vimrc" ] && rm -r "${BASEDIR}/.vimrc" 
+[ -f "${BASEDIR}/.vimrc" ] && rm "${BASEDIR}/.vimrc" 
 ln -vs ${BASEDIR}/.dotfiles/vim/.vimrc ${BASEDIR}/.vimrc
 [ -d "${BASEDIR}/.vim" ] && rm -r "${BASEDIR}/.vim" 
 ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
@@ -19,9 +25,9 @@ ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 # 2. clone doom repository 
 # 3. doom install 
 # link files here
-[ -d "${BASEDIR}/.doom.d" ] && rm -r "${BASEDIR}/.doom.d" 
-ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.doom.d
+[ -d "${BASEDIR}/.config/doom" ] && rm -r "${BASEDIR}/.config/doom" 
+ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.config/doom
 
 # git
-[ -d "${BASEDIR}/.gitconfig" ] && rm -r "${BASEDIR}/.gitconfig" 
+[ -f "${BASEDIR}/.gitconfig" ] && rm "${BASEDIR}/.gitconfig" 
 ln -vs ${BASEDIR}/.dotfiles/git/.gitconfig ${BASEDIR}/.gitconfig
