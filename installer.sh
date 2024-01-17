@@ -19,8 +19,8 @@ ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 # 2. clone doom repository 
 # 3. doom install 
 # link files here
-[ -d "${BASEDIR}/.doom.d" ] && rm -r "${BASEDIR}/.doom.d"
-ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.doom.d
+[ -d "${BASEDIR}/.config/.doom.d" ] && rm -r "${BASEDIR}/.config/.doom.d"
+ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.config/.doom.d
 
 # git
 [ -f "${BASEDIR}/.gitconfig" ] && rm "${BASEDIR}/.gitconfig"
