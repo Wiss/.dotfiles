@@ -167,7 +167,8 @@ function cd() {
 
 
 # >>> Doom >>>
-export PATH="$HOME/.emacs.d/bin:$PATH"
+#export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 # <<< Doom <<<
 
 # >>> export bin path for PlatformIO >>>
@@ -197,3 +198,9 @@ PS1="\[\033[38;5;14m\]\u\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;11m\]\d\[$(
 #export HTTP_PROXY=http://proxy.kip.uni-heidelberg.de:8080
 #export HTTPS_PROXY=https://proxy.kip.uni-heidelberg.de:8080
 #export FTP_PROXY=ftp://proxy2.kip.uni-heidelberg.de:2121
+
+# >>> Wakatime >>>
+# install using the following instructions
+# https://wakatime.com/emacs 
+export PATH="$HOME/.wakatime:$PATH"
+# <<< Wakatime <<<

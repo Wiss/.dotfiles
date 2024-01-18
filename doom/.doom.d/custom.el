@@ -11,6 +11,9 @@
  '(package-selected-packages
    '(auto-complete platformio-mode ccls wakatime-mode writegood-mode langtool org-ref))
  '(safe-local-variable-values '((eval progn (pp-buffer) (indent-buffer))))
+ '(wakatime-api-key "waka_18eb2a28-7a35-495a-a0af-33cac5ba0506")
+ ;;'(wakatime-cli-path "wakatime-cli")
+ '(wakatime-cli-path "~/.wakatime/wakatime-cli")
  '(warning-suppress-log-types
    '((doom-after-init-hook)
      (doom-after-init-hook)
