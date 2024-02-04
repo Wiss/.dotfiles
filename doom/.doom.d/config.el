@@ -37,7 +37,7 @@
       org_gtd (file-name-concat org-directory "gtd")
       org_journal (file-name-concat org-directory "journal")
       org_roam (file-name-concat org-directory "roam")
-      org-roam-directory org-directory ;;org_roam
+      org-roam-directory org_roam ;; org-directory
       org_roam_ids (file-name-concat org_roam ".orgids")
       org-id-locations-file org_roam_ids
       zot_bib (file-name-concat org-directory "zotLib.bib")
@@ -90,20 +90,27 @@
 ;; org-capture templates
 ;; with the specifier %i you will copy and paste all the highlited text in the tempalte
 ;; syntaxis https://orgmode.org/manual/Template-expansion.html
+(setq
+      org_gtd_inbox (file-name-concat org_gtd "inbox.org")
+      org_gtd_tickler (file-name-concat org_gtd "tickler.org")
+      org_gtd_notes (file-name-concat org_gtd "notes.org")
+      org_gtd_calendar (file-name-concat org_gtd "calendar.org")
+ )
+
 (after! org
 (setq org-capture-templates
       ;; GTD
       '(("t" "Todo [inbox]" entry
-        (file+headline "~/Documents/braindump/gtd/inbox.org" "Tasks")
+        (file+headline org_gtd_inbox "Tasks")
         "* TODO %i%?\n/Entered on: %U/")
       ("T" "Tickler" entry
-        (file+headline "~/Documents/braindump/gtd/tickler.org" "Tickler")
+        (file+headline org_gtd_tickler "Tickler")
         "* %i%?\n/Entered on: %U/")
       ("n" "Note" entry
-        (file+headline "~/Documents/braindump/gtd/notes.org" "Notes")
+        (file+headline org_gtd_notes "Notes")
         "* NOTE (%a)\n%i%?\n/Entered on/ %U")
       ("e" "Event" entry
-        (file+headline "~/Documents/braindump/gtd/calendar.org" "Future")
+        (file+headline org_gtd_calendar "Future")
         "* %i%? :meeting:\n%^T"))
 ))
 ;; Key-bind reminder
