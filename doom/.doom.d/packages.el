@@ -13,6 +13,9 @@
 (package! epresent)
 (package! wakatime-mode)
 
+(unpin! org-roam)
+(package! org-roam-ui)
+
 ;;(package! copilot
 ;;  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 ;; To install a package directly from a remote git repo, you must specify a
