@@ -38,8 +38,8 @@
       org_journal (file-name-concat org-directory "journal")
       org_roam (file-name-concat org-directory "roam")
       org-roam-directory org_roam ;; org-directory
-      org_roam_ids (file-name-concat org_roam ".orgids")
-      org-id-locations-file org_roam_ids
+      ;;org_roam_ids (file-name-concat org_roam ".orgids")
+      ;;org-id-locations-file org_roam_ids
       zot_bib (file-name-concat org-directory "zotLib.bib")
       ;org-agenda-files (list org_notes org_gtd org_journal org_roam ))
       org-agenda-files (directory-files-recursively org-directory "\\.org$"))
@@ -63,6 +63,9 @@
 
 ;; enable lsp display hierarchy
 (setq lsp-headerline-breadcrumb-enable t)
+
+;; enable org-id-link-to-org-use-id for linking id properties
+ (setq org-id-link-to-org-use-id 'use-existing)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -153,7 +156,7 @@
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
-                 (org-agenda-overriding-header "Tasks\n")))
+                 (org-agenda-overriding-header "Tasks (NEXT and WIP)\n")))
           (agenda ""
                   ((org-agenda-entry-types '(:deadline))
                    (org-agenda-span 10)
@@ -177,6 +180,8 @@
                  (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "Waiting tasks\n")))
+          (tags-todo "+PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|+PRIORITY=\"A\"-DEADLINE={.}"
+                     ((org-agenda-overriding-header "Important but not urgent")))
           (tags-todo "Inbox"
                      ((org-agenda-prefix-format "  %?-12t% s")
                       (org-agenda-overriding-header "Inbox\n")))
@@ -217,7 +222,18 @@
                       (org-deadline-warning-days 0)
                       (org-agenda-entry-types '(:deadline))
                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                      (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))))
+                      (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
+      ("e" "Eisenhower matrix"
+       ((tags-todo "+PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
+                   ((org-agenda-overriding-header "Urgent (within 10 days) and important")))
+        (tags-todo "+PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|+PRIORITY=\"A\"-DEADLINE={.}"
+                   ((org-agenda-overriding-header "Important but not urgent")))
+        (tags-todo "-PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
+                   ((org-agenda-overriding-header "Urgent (within 10 days) but not important")))
+        (tags-todo "-PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|-PRIORITY=\"A\"-DEADLINE={.}"
+                   ((org-agenda-overriding-header "Neither important nor urgent"))))
+       nil)
+      ))
 
 ;; log time for each task C-c C-x C-i (clock in)
 ;; C-c C-x C-o (clock out)
@@ -242,10 +258,11 @@
       org-roam-dailies-capture-templates
       '(("d" "default" entry
          "* %?"
-         :target (file+head "%<%Y-%m-%d>.org"
-                            "#+title: %<%Y-%m-%d>\n"))))
+         :target (file+head "%<%Y%m%d>.org"
+                            "#+title: %<%A, %x>\n"))))
 ;; journal keybinding
 (global-set-key (kbd "C-c j i") 'org-journal-new-entry)
+(global-set-key (kbd "C-c j n") 'org-roam-dailies-capture-today)
 ;; roam notes keybinding
 (global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)

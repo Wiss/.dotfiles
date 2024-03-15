@@ -20,7 +20,7 @@ To make [roam-ui](https://github.com/org-roam/org-roam-ui) work, just install it
 M-x package-install org-roam-ui 
 ```
 
-Finally, for latex stuff see nodes with the `installation` tag
+Finally, for latex stuff, and rofi see nodes with the `installation` tag
 
 # Wakatime
 
@@ -29,3 +29,4 @@ Install using the following instructions:
 `
 
 `
+
