@@ -1,3 +1,5 @@
 # vim files
 /vim/.vim/.netrwhist
 /vim/.vim/plugged/*
+
+doom/.doom.m/custom.el
