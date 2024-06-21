@@ -162,7 +162,7 @@
                    (org-agenda-span 10)
                    (org-agenda-show-all-dates nil)
                    (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
-                   (org-deadline-warning-days 0)
+                   (org-deadline-warning-days 10)
                    (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo 'done))
                    (org-agenda-overriding-header "Deadlines\n")))
@@ -171,7 +171,7 @@
                    (org-agenda-span 30)
                    (org-agenda-show-all-dates nil)
                    (org-agenda-prefix-format " %-12:c%?-12t% s [%e] ")
-                   (org-deadline-warning-days 0)
+                   (org-deadline-warning-days 10)
                    (org-agenda-overriding-header "Scheduled\n")))
           (todo "WAITING"
                 ((org-agenda-skip-function
@@ -187,7 +187,7 @@
                       (org-agenda-overriding-header "Inbox\n")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "Completed today\n")))))
-      ("A" "Daily agenda and top priority tasks"
+      ("p" "Daily agenda and top priority tasks"
          ((tags-todo "*"
                      ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
                       (org-agenda-skip-function
@@ -257,9 +257,13 @@
 (setq org-roam-dailies-directory org_journal
       org-roam-dailies-capture-templates
       '(("d" "default" entry
-         "* %?"
+         "* %<%H:%M> - %?"
          :target (file+head "%<%Y%m%d>.org"
-                            "#+title: %<%A, %x>\n"))))
+                            "#+title: %<%A, %x | week %W | day %j>\n"))))
+;; org journal
+ (setq org-journal-file-format "%Y%m%d.org")
+
+;;
 ;; journal keybinding
 (global-set-key (kbd "C-c j i") 'org-journal-new-entry)
 (global-set-key (kbd "C-c j n") 'org-roam-dailies-capture-today)
@@ -353,3 +357,8 @@
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+
+;; remap
+(global-set-key (kbd "C-c z") 'org-cycle-list-bullet)
+;;(global-set-key (kbd ".") 'repeat)

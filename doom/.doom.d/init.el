@@ -94,7 +94,7 @@
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
@@ -195,15 +195,15 @@
        ;;literate
        (default +bindings +smartparens))
 
-(with-eval-after-load 'ox-latex
-(add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
-           [NO-DEFAULT-PACKAGES]
-           [PACKAGES]
-           [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+;;(with-eval-after-load 'ox-latex
+;;(add-to-list 'org-latex-classes
+;;             '("org-plain-latex"
+;;               "\\documentclass{article}
+;;           [NO-DEFAULT-PACKAGES]
+;;           [PACKAGES]
+;;           [EXTRA]"
+;;               ("\\section{%s}" . "\\section*{%s}")
+;;               ("\\subsection{%s}" . "\\subsection*{%s}")
+;;               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;;               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;;               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))

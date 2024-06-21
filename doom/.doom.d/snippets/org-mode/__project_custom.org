@@ -20,10 +20,12 @@
 $0
 
 * Tasks [/]
+* Meetings
 * Timeframe
 * Notes
 * Ideas
 * Questions
+* Code
 * General time report
 ** today
 #+BEGIN: clocktable :scope file :block today
