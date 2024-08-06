@@ -61,8 +61,20 @@
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
+;; lsp
 ;; enable lsp display hierarchy
 (setq lsp-headerline-breadcrumb-enable t)
+(setq lsp-file-watch-threshold 5000)
+(with-eval-after-load 'lsp-mode
+  ;;(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.my-folder\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].ipynb_checkpoints\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].git\\'")
+  ;; or
+  ;;(add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
+  )
+
 
 ;; enable org-id-link-to-org-use-id for linking id properties
  (setq org-id-link-to-org-use-id 'use-existing)
@@ -362,3 +374,4 @@
 ;; remap
 (global-set-key (kbd "C-c z") 'org-cycle-list-bullet)
 ;;(global-set-key (kbd ".") 'repeat)
+
