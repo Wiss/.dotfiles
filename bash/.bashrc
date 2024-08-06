@@ -204,3 +204,6 @@ PS1="\[\033[38;5;14m\]\u\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;11m\]\d\[$(
 # https://wakatime.com/emacs 
 export PATH="$HOME/.wakatime:$PATH"
 # <<< Wakatime <<<
+# >>> Alias >>>
+alias p="python"
+# <<< Alias <<<
