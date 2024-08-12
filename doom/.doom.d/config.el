@@ -375,3 +375,17 @@
 (global-set-key (kbd "C-c z") 'org-cycle-list-bullet)
 ;;(global-set-key (kbd ".") 'repeat)
 
+;; ellama
+(use-package ellama
+  :init
+  ;; setup key bindings
+  (setopt ellama-keymap-prefix "C-c e")
+  ;; language you want ellama to translate to
+  (setopt ellama-language "English")
+  (require 'llm-ollama)
+  ;; this model should be pulled to use it
+  ;; value should be the same as you print in terminal during pull
+  (setopt ellama-provider
+		  (make-llm-ollama
+		   :chat-model "llama3.1" :embedding-model "lamma3.1"
+                   )))
