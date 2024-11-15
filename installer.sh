@@ -30,8 +30,8 @@ ln -vs ${BASEDIR}/.dotfiles/vim/.vimrc ${BASEDIR}/.vimrc
 ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 
 # nvim
-[ -d "${BASEDIR}/.nvim" ] && rm -r "${BASEDIR}/.nvim"
-ln -vs ${BASEDIR}/.dotfiles/nvim ${BASEDIR}/.nvim
+[ -d "${BASEDIR}/.config/nvim" ] && rm -r "${BASEDIR}/.config/nvim"
+ln -vs ${BASEDIR}/.dotfiles/nvim ${BASEDIR}/.config/nvim
 
 # doom
 # Remeber: 
