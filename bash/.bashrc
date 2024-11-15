@@ -162,7 +162,6 @@ function cd() {
       fi
   fi
 }
-#dd <<< autoactivate venvs
 # >>> autoactivate venvs >>>
 
 
