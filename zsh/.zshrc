@@ -228,6 +228,12 @@ alias l='ls -CF'
 alias p="python3"
 alias zotero="/opt/zotero/zotero"
 alias sourcezsh="source ~/.zshrc"
+
+# if nvim is available use it instead
+if type nvim 2>&1 >/dev/null ; then
+	alias vim=nvim
+	alias vimdiff="nvim -d "
+fi
 # <<< Alias <<<
 
 # export paths
