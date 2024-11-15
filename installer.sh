@@ -29,6 +29,10 @@ ln -vs ${BASEDIR}/.dotfiles/vim/.vimrc ${BASEDIR}/.vimrc
 [ -d "${BASEDIR}/.vim" ] && rm -r "${BASEDIR}/.vim"
 ln -vs ${BASEDIR}/.dotfiles/vim/.vim ${BASEDIR}/.vim
 
+# nvim
+[ -d "${BASEDIR}/.nvim" ] && rm -r "${BASEDIR}/.nvim"
+ln -vs ${BASEDIR}/.dotfiles/nvim ${BASEDIR}/.nvim
+
 # doom
 # Remeber: 
 # 1. Install emacs
