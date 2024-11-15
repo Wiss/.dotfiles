@@ -142,6 +142,14 @@ bindkey '^N' autosuggest-execute
 
 [ -d "$pluginDir/zsh-syntax-highlighting" ] && source $pluginDir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+[ -d "$pluginDir/zsh-history-substring-search" ] && source $pluginDir/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# actual delete character
+bindkey "^[[3~" delete-char
+# history line up or down with ctrl-j/k
+bindkey '^K' up-line-or-history
+bindkey '^J' down-line-or-history
 
 # User configuration
 
@@ -217,7 +225,22 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 ##
-alias p="python"
+alias p="python3"
 alias zotero="/opt/zotero/zotero"
 alias sourcezsh="source ~/.zshrc"
 # <<< Alias <<<
+
+# export paths
+# >>> Wakatime >>>
+# install using the following instructions
+# https://wakatime.com/emacs 
+export PATH="$HOME/.wakatime:$PATH"
+# <<< Wakatime <<<
+
+# >>> Heroku >>>
+export PATH="$HOME/usr/local/bin/heroku:$PATH"
+# <<< Heroku <<<
+
+# >>> Poetry >>>
+export PATH="/home/ijaras/.local/bin:$PATH"
+# <<< Poetry <<<
