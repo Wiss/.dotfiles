@@ -378,6 +378,12 @@
 (global-set-key (kbd "C-c z") 'org-cycle-list-bullet)
 ;;(global-set-key (kbd ".") 'repeat)
 
+;; zsh
+(defun zsh ()
+  (interactive)
+  (term "/bin/zsh"))
+(global-set-key (kbd "C-c t") 'zsh)
+
 ;; ellama
 (use-package ellama
   :init
