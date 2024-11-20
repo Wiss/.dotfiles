@@ -46,9 +46,12 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t
-      display-fill-column-indicator-column 79 ; 80 column indicator - Emacs columns are 0-based...
-      global-display-fill-column-indicator-mode 1)
+(setq-default display-line-numbers-type t
+              display-fill-column-indicator-column 80) ; Emacs columns are 0-based
+(global-display-fill-column-indicator-mode)
+
+;; set mouse usage in terminal
+(xterm-mouse-mode 1)
 
 ;; autosave
 (setq auto-save-default t
