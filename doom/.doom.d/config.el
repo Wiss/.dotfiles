@@ -46,7 +46,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq-default display-line-numbers-type t
+(setq-default display-line-numbers-type 'visual ;t
               display-fill-column-indicator-column 80) ; Emacs columns are 0-based
 (global-display-fill-column-indicator-mode)
 
@@ -351,6 +351,8 @@
   :ensure t
   :init
   (pdf-tools-install))
+
+(setq +latex-viewers '(pdf-tools))
 
 ; If we are workig on a machine with macOS
 (if IS-MAC
