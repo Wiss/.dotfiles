@@ -29,7 +29,7 @@ Plug 'stephpy/vim-yaml'                " YAML support
 Plug 'elzr/vim-json'                   " Better JSON support
 Plug 'w0rp/ale'                        " Linting engine
 Plug 'maximbaz/lightline-ale'          " Lightline + Ale
-Plug 'plasticboy/vim-markdown'         " Markdown support
+Plug 'preservim/vim-markdown'         " Markdown support
 Plug 'lervag/vimtex'                   " Latex support
 
 " Other 
