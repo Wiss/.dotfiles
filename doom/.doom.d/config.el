@@ -159,6 +159,10 @@
 (add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
 
 ;;(setq org-agenda-custom-commands
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (setq display-line-numbers 'relative))) ; Options: t, 'relative, or nil
+
 (setq org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda "*"

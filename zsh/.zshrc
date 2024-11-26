@@ -241,6 +241,9 @@ fi
 # <<< Alias <<<
 
 # export paths
+# >>> Doom >>>
+export PATH="$HOME/.config/emacs/bin:$PATH"
+# <<< Doom <<<
 # >>> Wakatime >>>
 # install using the following instructions
 # https://wakatime.com/emacs 
