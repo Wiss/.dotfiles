@@ -270,6 +270,19 @@
 (add-hook 'LaTeX-mode #'citar-capf-setup)
 (add-hook 'org-mode #'citar-capf-setup)
 
+(after! ox-latex
+(add-to-list 'org-latex-classes
+             '("org-plain-latex"
+               "\\documentclass{article}
+                [NO-DEFAULT-PACKAGES]
+                [PACKAGES]
+                [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
 (global-set-key (kbd "C-c s") 'citar-open)
 
 ;; journal and roam

@@ -45,8 +45,8 @@
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
-       (pretty-code
-        +fira)       ; replace bits of code with pretty symbols
+       ;;(pretty-code
+       ;; +fira)       ; replace bits of code with pretty symbols
        treemacs          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
@@ -196,15 +196,3 @@
        ;;literate
        (default +bindings +smartparens))
 
-;;(with-eval-after-load 'ox-latex
-;;(add-to-list 'org-latex-classes
-;;             '("org-plain-latex"
-;;               "\\documentclass{article}
-;;           [NO-DEFAULT-PACKAGES]
-;;           [PACKAGES]
-;;           [EXTRA]"
-;;               ("\\section{%s}" . "\\section*{%s}")
-;;               ("\\subsection{%s}" . "\\subsection*{%s}")
-;;               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-;;               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-;;               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
