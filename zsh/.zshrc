@@ -133,6 +133,11 @@ HIST_STAMPS="mm/dd/yyyy"
 #plugins=(git zsh-autosuggestions zsh-syntax-highlighting 
 #        fast-syntax-highlighting zsh-autocomplete)
 
+# activate vi mode
+bindkey -v
+bindkey ^R history-incremental-search-backward 
+bindkey ^S history-incremental-search-forward
+
 # taken from Julito's configs
 # https://github.com/JulianGoeltz/myConfigFiles/blob/master/zshrc
 # ### Plugins
