@@ -69,6 +69,7 @@ endif
 syntax on  " Turn on syntax highlighting
 set background=dark 
 set nu              " number lines
+set relativenumber  " relative numbers
 set colorcolumn=80  " show column at 80 characters
 set linebreak       " have lines wrap instead of continue off-screen
 set nojoinspaces    " suppress inserting two spaces between sentences
