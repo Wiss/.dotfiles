@@ -55,3 +55,6 @@ M-x lsp-install-server # choose pyright
 git submodule update --init
 
 ## sync zotero lib and export it again to get proper ref to files
+
+# install latexmk
+sudo apt install latexmk
