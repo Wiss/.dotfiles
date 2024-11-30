@@ -1,0 +1,57 @@
+# git
+## install git
+sudo apt install git
+
+## set ssh git access
+generate ssh key 
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+## add it to github
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+# dotfiles
+## clone .dotfiles and run installer.sh from $HOME
+
+## install vim and neovim
+sudo apt install vim && sudo apt install neovim
+
+## install zsh
+sudo apt install zsh
+# zsh as default shell
+chsh -s $(which zsh)
+
+## update submodules in .dotfiles
+git submodule update --init
+
+## install emacs
+sudo apt-get install emacs # 29.3 in ubuntu 24.04
+
+## install doom
+## https://github.com/doomemacs/doomemacs?tab=readme-ov-file#install
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
+
+# doom emacs extras
+## install packages in emacs
+M-x nerd-icons-install-fonts
+M-x package-install org-roam-ui 
+
+## also install (installations notes in emacs)
+## for rendering pdfs in emacs
+sudo apt-get install -y dvipng
+## for pyright and LSP in emacs
+sudo apt install nodejs && install npm && npm install -g pyright
+##sudo apt install nodejs
+##sudo apt install npm
+
+## then install copilot
+M-x copilot-install-server
+
+## and lsp server
+M-x lsp-install-server # choose pyright
+
+## clone braindump repo
+## update submodules in braindump
+git submodule update --init
+
+## sync zotero lib and export it again to get proper ref to files
