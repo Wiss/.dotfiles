@@ -47,3 +47,7 @@ ln -vs ${BASEDIR}/.dotfiles/doom/.doom.d ${BASEDIR}/.config/doom
 # git
 [ -f "${BASEDIR}/.gitconfig" ] && rm "${BASEDIR}/.gitconfig"
 ln -vs ${BASEDIR}/.dotfiles/git/.gitconfig ${BASEDIR}/.gitconfig
+
+# fzf
+[ -d "${BASEDIR}/.fzf" ] && rm -r "${BASEDIR}/.fzf"
+ln -vs ${BASEDIR}/.dotfiles/fzf/.fzf ${BASEDIR}/.fzf

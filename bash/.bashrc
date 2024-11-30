@@ -206,3 +206,5 @@ export PATH="$HOME/.wakatime:$PATH"
 # >>> Alias >>>
 alias p="python"
 # <<< Alias <<<
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

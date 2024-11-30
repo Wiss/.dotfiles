@@ -262,3 +262,5 @@ export PATH="$HOME/usr/local/bin/heroku:$PATH"
 # >>> Poetry >>>
 export PATH="/home/ijaras/.local/bin:$PATH"
 # <<< Poetry <<<
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
