@@ -66,7 +66,7 @@ SAVEHIST=1000000
 #define_rprompt
 
 # ### Themes 
-themeDir="$HOME/.zsh/themes/"
+themeDir="$HOME/.zsh/themes"
 # load power10k theme
 [ -d "$themeDir/powerlevel10k" ] && source $themeDir/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -141,7 +141,7 @@ bindkey ^S history-incremental-search-forward
 # taken from Julito's configs
 # https://github.com/JulianGoeltz/myConfigFiles/blob/master/zshrc
 # ### Plugins
-pluginDir="$HOME/.zsh/plugins/"
+pluginDir="$HOME/.zsh/plugins"
 # load autosuggestions
 [ -d "$pluginDir/zsh-autosuggestions" ] && source $pluginDir/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_USE_ASYNC=""

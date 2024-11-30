@@ -258,10 +258,11 @@
 ;; C-c C-x C-o (clock out)
 (setq org-log-done 'time)
 
-
 ;; citar
-(setq! citar-bibliography zot_bib) ;;'("~/braindump/zotLib.bib"))
-(setq! citar-notes-paths (list org_roam)) ;;'("~/braindump/notes/"))
+(setq!
+        citar-bibliography zot_bib ;;'("~/braindump/zotLib.bib"))
+        citar-notes-paths (list org_roam)) ;;'("~/braindump/notes/"))
+)
 ;;(setq! citar-symbols
 ;;      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
 ;;        (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
