@@ -56,5 +56,8 @@ git submodule update --init
 
 ## sync zotero lib and export it again to get proper ref to files
 
-# install latexmk
+## install latexmk
 sudo apt install latexmk
+
+## install latex packages
+sudo apt install texlive texlive-latex-extra texlive-fonts-recommended
