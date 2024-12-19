@@ -120,13 +120,13 @@
       ;; GTD
       '(("t" "Todo [inbox]" entry
         (file+headline org_gtd_inbox "Tasks")
-        "* TODO %i%?\n/Entered on: %U/")
+        "* TODO %i%?\nCREATED: %U")
       ("T" "Tickler" entry
         (file+headline org_gtd_tickler "Tickler")
-        "* %i%?\n/Entered on: %U/")
+        "* %i%?\nCREATED: %U")
       ("n" "Note" entry
         (file+headline org_gtd_notes "Notes")
-        "* NOTE (%a)\n%i%?\n/Entered on/ %U")
+        "* NOTE (%a)\n%i%?\nCREATED: %U")
       ("e" "Event" entry
         (file+headline org_gtd_calendar "Future")
         "* %i%? :meeting:\n%^T"))
@@ -261,7 +261,7 @@
 ;; citar
 (setq!
         citar-bibliography zot_bib ;;'("~/braindump/zotLib.bib"))
-        citar-notes-paths (list org_roam)) ;;'("~/braindump/notes/"))
+        citar-notes-paths (list org_roam) ;;'("~/braindump/notes/"))
 )
 ;;(setq! citar-symbols
 ;;      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
