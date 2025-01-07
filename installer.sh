@@ -49,3 +49,7 @@ ln -vs ${BASEDIR}/.dotfiles/git/.gitconfig ${BASEDIR}/.gitconfig
 # fzf
 [ -d "${BASEDIR}/.fzf" ] && rm -r "${BASEDIR}/.fzf"
 ln -vs ${BASEDIR}/.dotfiles/fzf/.fzf ${BASEDIR}/.fzf
+
+# tmux
+[ -f "${BASEDIR}/.tmux.conf" ] && rm "${BASEDIR}/.tmux.conf"
+ln -vs ${BASEDIR}/.dotfiles/tmux/.tmux.conf ${BASEDIR}/.tmux.conf
