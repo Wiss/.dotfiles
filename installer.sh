@@ -16,9 +16,7 @@ ln -vs ${BASEDIR}/.dotfiles/bash/.bashrc ${BASEDIR}/.bashrc
 # zshrc
 [ -f "${BASEDIR}/.zshrc" ] && rm "${BASEDIR}/.zshrc" 
 ln -vs ${BASEDIR}/.dotfiles/zsh/.zshrc ${BASEDIR}/.zshrc
-[ -f "${BASEDIR}/.zprofile" ] && rm "${BASEDIR}/.zprofile" 
-ln -vs ${BASEDIR}/.dotfiles/zsh/.zprofile ${BASEDIR}/.zprofile
-[ -f "${BASEDIR}/.p10k.zsh" ] && rm "${BASEDIR}/.p10k.zsh" 
+[ -f "${BASEDIR}/.p10k.zsh" ] && rm "${BASEDIR}/.p10k.zsh"
 ln -vs ${BASEDIR}/.dotfiles/zsh/.p10k.zsh ${BASEDIR}/.p10k.zsh
 [ -d "${BASEDIR}/.zsh" ] && rm -r "${BASEDIR}/.zsh"
 ln -vs ${BASEDIR}/.dotfiles/zsh/.zsh ${BASEDIR}/.zsh
