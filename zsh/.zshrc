@@ -237,7 +237,11 @@ alias p="python3"
 alias zotero="/opt/zotero/zotero"
 alias sourcezsh="source ~/.zshrc"
 alias e="emacs -nw"
-alias sourceros="source /opt/ros/jazzy/setup.zsh"
+alias sourceros='source /opt/ros/jazzy/setup.zsh && 
+    eval "$(/usr/bin/register-python-argcomplete ros2)" && 
+    eval "$(/usr/bin/register-python-argcomplete colcon)"'
+alias sourcews="source ./install/local_setup.zsh"
+alias r="ros2"
 
 # if nvim is available use it instead
 if type nvim 2>&1 >/dev/null ; then
@@ -265,3 +269,12 @@ export PATH="/home/ijaras/.local/bin:$PATH"
 # <<< Poetry <<<
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# >>> functions >>>
+
+# >>> ros2 >>>
+# to enable ros autocompletion 
+function ros_autocompletion() {
+    eval "$(/usr/bin/register-python-argcomplete ros2)" 
+    eval "$(/usr/bin/register-python-argcomplete colcon)"
+}
+# <<< ros2 <<<
