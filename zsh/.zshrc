@@ -269,6 +269,14 @@ export PATH="/home/ijaras/.local/bin:$PATH"
 # <<< Poetry <<<
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# <<< functions <<<
+function clean_emacs_autosave() {
+    autosavefile=~/.config/emacs/.local/etc/workspaces/autosave
+    autosavefiletmp=~/.config/emacs/.local/etc/workspaces/autosavetmp
+    grep -vwE "\(mouse-2 . #" "$autosavefile" > "$autosavefiletmp" 
+    mv "$autosavefiletmp" "$autosavefile"
+
+}
 # >>> functions >>>
 
 # >>> ros2 >>>
