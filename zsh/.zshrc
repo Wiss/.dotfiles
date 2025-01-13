@@ -253,6 +253,7 @@ alias sourceros='source /opt/ros/jazzy/setup.zsh &&
     eval "$(/usr/bin/register-python-argcomplete colcon)"'
 alias sourcews="source ./install/local_setup.zsh"
 alias r="ros2"
+alias wezterm='WAYLAND_DISPLAY="" flatpak run org.wezfurlong.wezterm'
 
 # if nvim is available use it instead
 if type nvim 2>&1 >/dev/null ; then
