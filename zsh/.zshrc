@@ -279,6 +279,11 @@ export PATH="$HOME/usr/local/bin/heroku:$PATH"
 export PATH="/home/ijaras/.local/bin:$PATH"
 # <<< Poetry <<<
 
+# >>> thefuck >>>
+export PATH="$HOME/.local/bin:$PATH"
+type thefuck >/dev/null 2>&1 && eval $(thefuck --alias) # for correct bindings
+# <<< thefuck <<<
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # <<< functions <<<
 function mkcd () { 
