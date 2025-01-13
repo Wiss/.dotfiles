@@ -139,7 +139,18 @@ bindkey ^R history-incremental-search-backward
 bindkey ^S history-incremental-search-forward
 
 # taken from Julito's configs
-# https://github.com/JulianGoeltz/myConfigFiles/blob/master/zshrc
+# https://github.com/JulianGoeltz/myConfigFiles/blob/master/zshr
+# for file navigation (copied from https://github.com/obreitwi/dot_zsh)
+myalias='..'
+mycmd='cd ..'
+for i in {1..20}; do
+    eval "alias ${myalias}='${mycmd}'"
+    myalias="${myalias}."
+    mycmd="${mycmd}/.."
+done
+unset mycmd
+unset myalias
+
 # ### Plugins
 pluginDir="$HOME/.zsh/plugins"
 # load autosuggestions
@@ -270,6 +281,10 @@ export PATH="/home/ijaras/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # <<< functions <<<
+function mkcd () { 
+    mkdir -p "$1" && cd -P "$1"
+}
+
 function clean_emacs_autosave() {
     autosavefile=~/.config/emacs/.local/etc/workspaces/autosave
     autosavefiletmp=~/.config/emacs/.local/etc/workspaces/autosavetmp
