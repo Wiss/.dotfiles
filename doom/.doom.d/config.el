@@ -420,6 +420,30 @@
 		  (make-llm-ollama
 		   :chat-model "llama3.1" :embedding-model "lamma3.1"
                    )))
+
+
+(defun org-export-to-html-and-commit ()
+  "Export the current Org file to HTML and update the Git project."
+  (interactive)
+  (when (and buffer-file-name
+             (string-equal (file-name-extension buffer-file-name) "org"))
+    (let* ((html-file (concat (file-name-sans-extension buffer-file-name) ".html"))
+           (git-project-dir "~/Documents/rcapinet_demo/docs/") ;; Replace with your Git project path
+           (git-html-file (expand-file-name (file-name-nondirectory html-file) git-project-dir)))
+      ;; Export the Org file to HTML
+      (org-export-to-file 'html html-file)
+      (message "Exported to HTML: %s" html-file)
+
+      ;; Copy the HTML file to the Git project
+      (copy-file html-file git-html-file t)
+      (message "Copied %s to %s" html-file git-project-dir)
+
+      ;; Commit the changes to Git
+      (let ((default-directory git-project-dir))
+        (shell-command (format "git add %s" (shell-quote-argument git-html-file)))
+        (shell-command "git commit -m 'update notes'")
+        (message "updated git project at %s" git-project-dir)))))
+
 (defun org-generate-piechart ()
   " generate a pie chart from the current Org table
    and insert the result the below the table "
