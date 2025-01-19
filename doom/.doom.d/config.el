@@ -44,6 +44,8 @@
       ;org-agenda-files (list org_notes org_gtd org_journal org_roam ))
       org-agenda-files (directory-files-recursively org-directory "\\.org$"))
 
+;; define the base path for custom python scripts
+(setq p-script-dir "~/.dotfiles/doom/.doom.d/scripts/python/")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq-default display-line-numbers-type 'visual ;t
@@ -418,3 +420,31 @@
 		  (make-llm-ollama
 		   :chat-model "llama3.1" :embedding-model "lamma3.1"
                    )))
+(defun org-generate-piechart ()
+  " generate a pie chart from the current Org table
+   and insert the result the below the table "
+  (interactive)
+  (when (org-at-table-p)
+    (let* ((table (cl-remove-if (lambda (row) (equal row 'hline)) (org-table-to-lisp))) ;; Filter out hline
+           (org-file (buffer-file-name)) ;; current org file
+           (python-script (expand-file-name "work_time.py" p-script-dir))
+           (temp-file (make-temp-file "table-data-" nil ".txt")) ;; Temporary file for table data
+           (output-file (concat (file-name-directory org-file) "piechart.png")) ;; Output file path in same directory
+           (table-str (mapconcat (lambda (row) (string-join row "\t")) table "\n"))) ;; Convert table to tab-delimited string
+      ;; Write the table to a temporary file
+      (with-temp-file temp-file
+        (insert table-str))
+      ;;(message "Temp file content: %s" table-str)
+      ;; Call the Python script
+      (call-process "python3" nil "*PieChart Output*" t python-script temp-file output-file)
+      ;; insert the results below the table
+      (if (file-exists-p output-file)
+        (save-excursion
+                (goto-char (org-table-end))
+                (insert "\n#+RESULTS:\n")
+                (insert (concat "[[file:" output-file "]]\n"))
+        ;; Clean up the temporary file
+        (delete-file temp-file)
+        ;; Optionally refresh Org inline images
+        (org-display-inline-images))
+     (message "Error: Pie chart was not generated.")))))
