@@ -81,6 +81,9 @@ set splitbelow      " Open new vertical split bottom
 set splitright      " Open new horizontal splits right
 set mouse+=a        " A necessary evil, mouse support
 
+" Use system clipboard
+set clipboard=unnamedplus
+
 " Spaces and tabs
 " use 4 spaces instead of tabs during formatting
 set expandtab       " tabs are spaces, mainly because of python
