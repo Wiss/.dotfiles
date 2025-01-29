@@ -298,6 +298,18 @@
 ;; org journal
  (setq org-journal-file-format "%Y%m%d.org")
 
+(setq org-roam-capture-templates
+      '(("d" "default" plain "%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n")
+         :unnarrowed t)
+
+        ("n" "note" plain
+         "* resources\n* what is it?\n* why is it important?\n* how to use it?\n* notes\n%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n\n")
+         :unnarrowed t)))
+
 ;;
 ;; journal keybinding
 (global-set-key (kbd "C-c j i") 'org-journal-new-entry)
