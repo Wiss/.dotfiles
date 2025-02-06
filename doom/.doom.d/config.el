@@ -301,13 +301,13 @@
 (setq org-roam-capture-templates
       '(("d" "default" plain "%?"
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n")
+                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n")
          :unnarrowed t)
 
         ("n" "note" plain
          "* resources\n* what is it?\n* why is it important?\n* how to use it?\n* notes\n%?"
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n\n")
+                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n")
          :unnarrowed t)))
 
 ;;
