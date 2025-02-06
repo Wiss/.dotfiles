@@ -122,13 +122,13 @@
       ;; GTD
       '(("t" "Todo [inbox]" entry
         (file+headline org_gtd_inbox "Tasks")
-        "* TODO %i%?\nCREATED: %U")
+        "* TODO %i%?\n:CREATED: %U")
       ("T" "Tickler" entry
         (file+headline org_gtd_tickler "Tickler")
-        "* %i%?\nCREATED: %U")
+        "* %i%?\n:CREATED: %U")
       ("n" "Note" entry
         (file+headline org_gtd_notes "Notes")
-        "* NOTE (%a)\n%i%?\nCREATED: %U")
+        "* NOTE (%a)\n%i%?\n:CREATED: %U")
       ("e" "Event" entry
         (file+headline org_gtd_calendar "Future")
         "* %i%? :meeting:\n%^T"))
