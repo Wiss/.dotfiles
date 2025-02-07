@@ -294,7 +294,7 @@
       '(("d" "default" entry
          "* %<%H:%M> - %?"
          :target (file+head "%<%Y%m%d>.org"
-                            "#+title: %<%A, %x | week %W | day %j>\n"))))
+                            "#+title: %<%A, %x | week %W | day %j>\n #+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n"))))
 ;; org journal
  (setq org-journal-file-format "%Y%m%d.org")
 
