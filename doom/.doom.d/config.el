@@ -411,6 +411,9 @@
 ;; remap
 (global-set-key (kbd "C-c z") 'org-cycle-list-bullet)
 ;;(global-set-key (kbd ".") 'repeat)
+(global-set-key (kbd "C-c C-c") 'comment-region)
+(global-set-key (kbd "C-c C-u") 'uncomment-region)
+(global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 
 ;; zsh
 (defun zsh ()
