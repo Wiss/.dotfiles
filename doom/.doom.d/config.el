@@ -80,6 +80,13 @@
   ;;(add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   )
 
+(setq python-check-command (executable-find "flake8"))
+
+(after! flycheck
+  (setq flycheck-checker 'python-flake8)  ;; Set Flake8 as the default checker
+  (setq flycheck-python-flake8-executable (executable-find "flake8"))  ;; Ensure the Flake8 executable is correct
+  (flycheck-add-next-checker 'lsp '(t . python-flake8))
+  )
 
 ;; enable org-id-link-to-org-use-id for linking id properties
  (setq org-id-link-to-org-use-id 'use-existing)
@@ -487,3 +494,11 @@
         ;; Optionally refresh Org inline images
         (org-display-inline-images))
      (message "Error: Pie chart was not generated.")))))
+
+;; pyenv
+(use-package! pyvenv
+  :config
+  (setq pyvenv-default-virtual-env-name "venv")  ;; Default venv directory name
+  (setq pyvenv-workon "~/.pyenv/versions/")      ;; Ensure compatibility with Pyenv
+  ;;(pyvenv-tracking-mode 1)
+  )                      ;; Auto-detect venv when opening a Python file
