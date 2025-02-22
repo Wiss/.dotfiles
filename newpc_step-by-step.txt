@@ -50,6 +50,9 @@ M-x copilot-install-server
 ## and lsp server
 M-x lsp-install-server # choose pyright
 
+# install flake8 system-wide
+pipx install flake8
+
 ## clone braindump repo
 ## update submodules in braindump
 git submodule update --init

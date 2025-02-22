@@ -159,7 +159,9 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyright)       ; beautiful is better than ugly
+       (python +lsp
+               +flake8)       ; beautiful is better than ugly
+       ;; for flake8 you need to ~pipx install flake8~
        ;; for using pyright you need to install it using pip
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
