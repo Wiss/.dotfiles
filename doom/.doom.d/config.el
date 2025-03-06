@@ -82,11 +82,10 @@
 
 (setq python-check-command (executable-find "flake8"))
 
-(after! flycheck
-  (setq flycheck-checker 'python-flake8)  ;; Set Flake8 as the default checker
-  (setq flycheck-python-flake8-executable (executable-find "flake8"))  ;; Ensure the Flake8 executable is correct
-  (flycheck-add-next-checker 'lsp '(t . python-flake8))
-  )
+(use-package! lsp-diagnostics)
+(after! (flycheck python)
+  (lsp-diagnostics-flycheck-enable)
+  (flycheck-add-next-checker 'lsp '(t . python-flake8)))
 
 ;; enable org-id-link-to-org-use-id for linking id properties
  (setq org-id-link-to-org-use-id 'use-existing)
