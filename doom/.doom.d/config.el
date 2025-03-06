@@ -498,6 +498,7 @@
 (use-package! pyvenv
   :config
   (setq pyvenv-default-virtual-env-name "venv")  ;; Default venv directory name
-  (setq pyvenv-workon "~/.pyenv/versions/")      ;; Ensure compatibility with Pyenv
-  ;;(pyvenv-tracking-mode 1)
+  ;;(setq pyvenv-workon "~/.pyenv/versions/")      ;; Ensure compatibility with Pyenv
+  (pyvenv-tracking-mode 1)
   )                      ;; Auto-detect venv when opening a Python file
+
