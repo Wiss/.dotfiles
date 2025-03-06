@@ -64,3 +64,5 @@ sudo apt install latexmk
 
 ## install latex packages
 sudo apt install texlive texlive-latex-extra texlive-fonts-recommended
+# to export to tex and pdf in emacs
+sudo apt-get install texlive-full
