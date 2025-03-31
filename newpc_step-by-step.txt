@@ -66,3 +66,7 @@ sudo apt install latexmk
 sudo apt install texlive texlive-latex-extra texlive-fonts-recommended
 # to export to tex and pdf in emacs
 sudo apt-get install texlive-full
+
+# aspell spanish dict
+sudo apt-get install aspell-es
+## use ispell-change-dictionary to change dicts

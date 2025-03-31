@@ -502,3 +502,6 @@
   (pyvenv-tracking-mode 1)
   )                      ;; Auto-detect venv when opening a Python file
 
+
+;; spell
+(setq ispell-extra-args '("--lang=es" "--lang=default"))
