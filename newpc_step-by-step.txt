@@ -70,3 +70,6 @@ sudo apt-get install texlive-full
 # aspell spanish dict
 sudo apt-get install aspell-es
 ## use ispell-change-dictionary to change dicts
+
+# get lsp support
+sudo apt-get install python3-pylsp
