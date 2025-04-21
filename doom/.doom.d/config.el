@@ -439,9 +439,27 @@
   ;; value should be the same as you print in terminal during pull
   (setopt ellama-provider
 		  (make-llm-ollama
-		   :chat-model "llama3.1" :embedding-model "lamma3.1"
+		   :chat-model "llama3.2" :embedding-model "lamma3.2"
                    )))
 
+;; gptel
+(load (expand-file-name "secrets.el" doom-user-dir) t t)
+(use-package gptel
+ :config
+ (setq! gptel-api-key nil))
+;; OPTIONAL configuration
+(setq
+ gptel-model 'gemma3:latest
+ gptel-backend (gptel-make-ollama "Ollama"
+                 :host "localhost:11434"
+                 :stream t
+                 :models '(
+                           gemma3:latest
+                           lamma3.2:latest
+                           deepseek-r1:latest
+                           )))
+
+(gptel-make-gemini "Gemini" :key my-gemini-api-key :stream t)
 
 (defun org-export-to-html-and-commit ()
   "Export the current Org file to HTML and update the Git project."
