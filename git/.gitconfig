@@ -18,3 +18,5 @@
 	untracked = red bold
 [init]
 	defaultBranch = main
+[merge]
+	tool = vimdiff
