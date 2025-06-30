@@ -420,6 +420,10 @@
 (global-set-key (kbd "C-c C-x") 'comment-region)
 (global-set-key (kbd "C-c C-u") 'uncomment-region)
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
+;; remap find
+(map! :leader
+      "f a" #'consult-find
+      )
 
 ;; zsh
 (defun zsh ()
