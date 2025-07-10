@@ -532,3 +532,19 @@
 
 ;; spell
 (setq ispell-extra-args '("--lang=es" "--lang=default"))
+
+;; modeline
+(setq doom-modeline-vcs-max-length 30)
+(setq doom-modeline-column-zero-based nil)
+(setq doom-modeline-position-column-line-format '("%l:%c"))
+(setq doom-modeline-percent-position nil)
+(setq doom-modeline-buffer-file-name-style 'truncate-except-project)
+(setq nerd-icons-scale-factor 1.1)
+(setq doom-modeline-lsp-icon t)
+;(setq doom-modeline-env-version t)
+(setq doom-modeline-check-icon t)
+(setq doom-modeline-major-mode-icon t)
+(custom-set-faces!
+  '(mode-line :height 1.0)
+  '(mode-line-inactive :height 1.0))
+;;(setq doom-modeline-position-column-line-format nil)
