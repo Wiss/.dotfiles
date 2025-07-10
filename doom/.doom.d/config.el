@@ -425,6 +425,11 @@
       "f a" #'consult-find
       )
 
+;; remap comment
+(map! :leader
+      "c c" #'evilnc-comment-or-uncomment-lines
+      )
+
 ;; zsh
 (defun zsh ()
   (interactive)
