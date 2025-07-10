@@ -371,6 +371,14 @@
     company-dabbrev-downcase nil
     company-idle-delay 0)  ; No delay in showing suggestions
 
+;; include babel support
+;;(after! org
+;;  (org-babel-do-load-languages
+;;   'org-babel-load-languages
+;;   '((shell . t)  ;; Ensure shell support is enabled
+;;     (python . t) ;; Add other languages if needed
+;;     (emacs-lisp . t))))
+
 ;; package templates
 ;; FIX
 ;; /project_[a-zA-Z0-9_]+\.org$
