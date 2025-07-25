@@ -1,8 +1,23 @@
 local wezterm = require 'wezterm'
 local config = {}
+-- to reload: CTRL + SHFT + R in terminal
 
 config.font = wezterm.font 'JetBrains Mono'
-config.color_scheme = 'Apple Classic'
+-- config.color_scheme = 'Apple Classic'
+-- config.color_scheme = 'Catppuccin Frappe'
+config.color_scheme = 'Gruvbox Dark (Gogh)'
+-- config.color_scheme = 'Chalk'
+-- config.color_scheme = 'Batman'
+-- config.color_scheme = 'Astrodark (Gogh)'
+
+-- config.color_schemes = {
+--   ['gray'] = {
+--     background = 'red',
+--   },
+--   ['Blue Scheme'] = {
+--     background = 'blue',
+--   },
+-- }
 
 config.keys = {
   -- This will create a new vertical split and run your default program inside it
