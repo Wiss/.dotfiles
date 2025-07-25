@@ -433,9 +433,23 @@
       "f a" #'consult-find
       )
 
-;; remap comment
-(map! :leader
+;; remap code
+(map! :map lsp-mode
+      ;; comment
+      :leader
       "c c" #'evilnc-comment-or-uncomment-lines
+      ;; show ui menu
+      "c m" #'lsp-ui-imenu
+      ;; show documentation
+      "c s" #'lsp-ui-doc-show
+      ;; hide documentation
+      "c h" #'lsp-ui-doc-hide
+      ;; focus frame docs
+      ;"c s f" #'lsp-ui-doc-focus-frame
+      "c F" #'lsp-ui-doc-focus-frame
+      ;; unfocus frame docs
+      ;"c s u" #'lsp-ui-doc-unfocus-frame
+      "c U" #'lsp-ui-doc-unfocus-frame
       )
 
 ;; zsh
