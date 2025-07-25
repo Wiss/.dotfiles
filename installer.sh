@@ -53,3 +53,7 @@ ln -vs ${BASEDIR}/.dotfiles/fzf/.fzf ${BASEDIR}/.fzf
 # tmux
 [ -f "${BASEDIR}/.tmux.conf" ] && rm "${BASEDIR}/.tmux.conf"
 ln -vs ${BASEDIR}/.dotfiles/tmux/.tmux.conf ${BASEDIR}/.tmux.conf
+
+# wezterm/
+[ -f "${BASEDIR}/.wezterm.lua" ] && rm "${BASEDIR}/.wezterm.lua"
+ln -vs ${BASEDIR}/.dotfiles/wezterm/.wezterm.lua ${BASEDIR}/.wezterm.lua
