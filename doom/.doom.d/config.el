@@ -452,6 +452,10 @@
       "c U" #'lsp-ui-doc-unfocus-frame
       )
 
+;; remap magit
+(map! :map magit-mode-map
+      :nv "z" #'magit-file-checkout)
+
 ;; zsh
 (defun zsh ()
   (interactive)
