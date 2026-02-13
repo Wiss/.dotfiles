@@ -27,6 +27,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Variables
 (setq
       org_directory (file-name-concat (getenv "HOME") "Documents/braindump")
