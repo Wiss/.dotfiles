@@ -30,20 +30,20 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Variables
 (setq
-      org_directory (file-name-concat (getenv "HOME") "Documents/braindump")
-      org-directory org_directory
-      org_projects (directory-files-recursively
-                         (file-name-concat org-directory "projects") "\\.org$")
-      ;;org_notes (list org_projects)
-      org_gtd (file-name-concat org-directory "gtd")
-      org_journal (file-name-concat org-directory "journal")
-      org_roam (file-name-concat org-directory "roam")
-      org-roam-directory org_roam ;; org-directory
-      ;;org_roam_ids (file-name-concat org_roam ".orgids")
-      ;;org-id-locations-file org_roam_ids
-      zot_bib (file-name-concat org-directory "zotLib.bib")
-      ;org-agenda-files (list org_notes org_gtd org_journal org_roam ))
-      org-agenda-files (directory-files-recursively org-directory "\\.org$"))
+ org_directory (file-name-concat (getenv "HOME") "Documents/braindump")
+ org-directory org_directory
+ org_projects (directory-files-recursively
+               (file-name-concat org-directory "projects") "\\.org$")
+ ;;org_notes (list org_projects)
+ org_gtd (file-name-concat org-directory "gtd")
+ org_journal (file-name-concat org-directory "journal")
+ org_roam (file-name-concat org-directory "roam")
+ org-roam-directory org_roam ;; org-directory
+ ;;org_roam_ids (file-name-concat org_roam ".orgids")
+ ;;org-id-locations-file org_roam_ids
+ zot_bib (file-name-concat org-directory "zotLib.bib")
+                                        ;org-agenda-files (list org_notes org_gtd org_journal org_roam ))
+ org-agenda-files (directory-files-recursively org-directory "\\.org$"))
 
 ;; define the base path for custom python scripts
 (setq p-script-dir "~/.dotfiles/doom/.doom.d/scripts/python/")
@@ -88,8 +88,9 @@
   (lsp-diagnostics-flycheck-enable)
   (flycheck-add-next-checker 'lsp '(t . python-flake8)))
 
+
 ;; enable org-id-link-to-org-use-id for linking id properties
- (setq org-id-link-to-org-use-id 'use-existing)
+(setq org-id-link-to-org-use-id 'use-existing)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -118,28 +119,28 @@
 ;; with the specifier %i you will copy and paste all the highlited text in the tempalte
 ;; syntaxis https://orgmode.org/manual/Template-expansion.html
 (setq
-      org_gtd_inbox (file-name-concat org_gtd "inbox.org")
-      org_gtd_tickler (file-name-concat org_gtd "tickler.org")
-      org_gtd_notes (file-name-concat org_gtd "notes.org")
-      org_gtd_calendar (file-name-concat org_gtd "calendar.org")
+ org_gtd_inbox (file-name-concat org_gtd "inbox.org")
+ org_gtd_tickler (file-name-concat org_gtd "tickler.org")
+ org_gtd_notes (file-name-concat org_gtd "notes.org")
+ org_gtd_calendar (file-name-concat org_gtd "calendar.org")
  )
 
 (after! org
-(setq org-capture-templates
-      ;; GTD
-      '(("t" "Todo [inbox]" entry
-        (file+headline org_gtd_inbox "Tasks")
-        "* TODO %i%?\n:CREATED: %U")
-      ("T" "Tickler" entry
-        (file+headline org_gtd_tickler "Tickler")
-        "* %i%?\n:CREATED: %U")
-      ("n" "Note" entry
-        (file+headline org_gtd_notes "Notes")
-        "* NOTE (%a)\n%i%?\n:CREATED: %U")
-      ("e" "Event" entry
-        (file+headline org_gtd_calendar "Future")
-        "* %i%? :meeting:\n%^T"))
-))
+  (setq org-capture-templates
+        ;; GTD
+        '(("t" "Todo [inbox]" entry
+           (file+headline org_gtd_inbox "Tasks")
+           "* TODO %i%?\n:CREATED: %U")
+          ("T" "Tickler" entry
+           (file+headline org_gtd_tickler "Tickler")
+           "* %i%?\n:CREATED: %U")
+          ("n" "Note" entry
+           (file+headline org_gtd_notes "Notes")
+           "* NOTE (%a)\n%i%?\n:CREATED: %U")
+          ("e" "Event" entry
+           (file+headline org_gtd_calendar "Future")
+           "* %i%? :meeting:\n%^T"))
+        ))
 ;; Key-bind reminder
 ;; C-c c < capture
 ;; C-c C-w < refile
@@ -155,9 +156,9 @@
 
 ;; more todo keywords for GTD
 (after! org
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WIP(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-      ))
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "WIP(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+        ))
 
 ;; create activated keyword
 (defun log-todo-next-creation-date (&rest ignore)
@@ -206,7 +207,7 @@
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
                  (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo 'done))
+                  '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "Waiting tasks\n")))
           (tags-todo "+PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|+PRIORITY=\"A\"-DEADLINE={.}"
                      ((org-agenda-overriding-header "Important but not urgent")))
@@ -215,14 +216,14 @@
                       (org-agenda-overriding-header "Inbox\n")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "Completed today\n")))))
-      ("p" "Daily agenda and top priority tasks"
-         ((tags-todo "*"
-                     ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
-                      (org-agenda-skip-function
-                       `(org-agenda-skip-entry-if
-                         'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
-                      (org-agenda-block-separator nil)
-                      (org-agenda-overriding-header "Important tasks without a date\n")))
+        ("p" "Daily agenda and top priority tasks"
+         (;;(tags-todo "*"
+          ;;           ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
+          ;;            (org-agenda-skip-function
+          ;;             `(org-agenda-skip-entry-if
+          ;;               'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
+          ;;            (org-agenda-block-separator nil)
+          ;;            (org-agenda-overriding-header "Important tasks without a date\n")))
           (agenda "" (;(org-agenda-start-day "+0d")
                       (org-agenda-start-day nil)
                       (org-agenda-span 1)
@@ -251,17 +252,17 @@
                       (org-agenda-entry-types '(:deadline))
                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                       (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))
-      ("e" "Eisenhower matrix"
-       ((tags-todo "+PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
-                   ((org-agenda-overriding-header "Urgent (within 10 days) and important")))
-        (tags-todo "+PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|+PRIORITY=\"A\"-DEADLINE={.}"
-                   ((org-agenda-overriding-header "Important but not urgent")))
-        (tags-todo "-PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
-                   ((org-agenda-overriding-header "Urgent (within 10 days) but not important")))
-        (tags-todo "-PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|-PRIORITY=\"A\"-DEADLINE={.}"
-                   ((org-agenda-overriding-header "Neither important nor urgent"))))
-       nil)
-      ))
+        ("e" "Eisenhower matrix"
+         ((tags-todo "+PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
+                     ((org-agenda-overriding-header "Urgent (within 10 days) and important")))
+          (tags-todo "+PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|+PRIORITY=\"A\"-DEADLINE={.}"
+                     ((org-agenda-overriding-header "Important but not urgent")))
+          (tags-todo "-PRIORITY=\"A\"+DEADLINE<=\"<+10d>\""
+                     ((org-agenda-overriding-header "Urgent (within 10 days) but not important")))
+          (tags-todo "-PRIORITY=\"A\"+DEADLINE>\"<+10d>\"|-PRIORITY=\"A\"-DEADLINE={.}"
+                     ((org-agenda-overriding-header "Neither important nor urgent"))))
+         nil)
+        ))
 
 ;; log time for each task C-c C-x C-i (clock in)
 ;; C-c C-x C-o (clock out)
@@ -269,9 +270,9 @@
 
 ;; citar
 (setq!
-        citar-bibliography zot_bib ;;'("~/braindump/zotLib.bib"))
-        citar-notes-paths (list org_roam) ;;'("~/braindump/notes/"))
-)
+ citar-bibliography zot_bib ;;'("~/braindump/zotLib.bib"))
+ citar-notes-paths (list org_roam) ;;'("~/braindump/notes/"))
+ )
 ;;(setq! citar-symbols
 ;;      `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
 ;;        (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
@@ -281,17 +282,17 @@
 (add-hook 'org-mode #'citar-capf-setup)
 
 (after! ox-latex
-(add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
+  (add-to-list 'org-latex-classes
+               '("org-plain-latex"
+                 "\\documentclass{article}
                 [NO-DEFAULT-PACKAGES]
                 [PACKAGES]
                 [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 (global-set-key (kbd "C-c s") 'citar-open)
 
@@ -303,18 +304,19 @@
          :target (file+head "%<%Y%m%d>.org"
                             "#+title: %<%A, %x | week %W | day %j>\n #+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n"))))
 ;; org journal
- (setq org-journal-file-format "%Y%m%d.org")
+(setq org-journal-file-format "%Y%m%d.org")
 
 (setq org-roam-capture-templates
       '(("d" "default" plain "%?"
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n")
+                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n#+startup: overview\n"
+                            )
          :unnarrowed t)
 
         ("n" "note" plain
          "* resources\n* what is it?\n* why is it important?\n* how to use it?\n* notes\n%?"
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n\n")
+                            "#+title: ${title}\n#+setupfile: ~/Documents/braindump/org-html-themes/org/theme-readtheorg.setup\n#+startup: overview\n")
          :unnarrowed t)))
 
 ;;
@@ -338,39 +340,39 @@
 
 ;; custom company config
 (setq company-minimum-prefix-length 1
-    company-tooltip-limit 4
-    company-tooltip-minimum 4
-    company-tooltip-align-annotations t
-    company-tooltip-flip-when-above t
-    company-require-match 'never
-    company-global-modes
-    '(not erc-mode
-          message-mode
-          help-mode
-          gud-mode
-          vterm-mode)
-    company-frontends
-    '(company-pseudo-tooltip-frontend  ; always show candidates in overlay tooltip
-      company-echo-metadata-frontend)  ; show selected candidate docs in echo area
+      company-tooltip-limit 4
+      company-tooltip-minimum 4
+      company-tooltip-align-annotations t
+      company-tooltip-flip-when-above t
+      company-require-match 'never
+      company-global-modes
+      '(not erc-mode
+        message-mode
+        help-mode
+        gud-mode
+        vterm-mode)
+      company-frontends
+      '(company-pseudo-tooltip-frontend  ; always show candidates in overlay tooltip
+        company-echo-metadata-frontend)  ; show selected candidate docs in echo area
 
-    ;; Buffer-local backends will be computed when loading a major mode, so
-    ;; only specify a global default here.
-    company-backends '(company-capf)
+      ;; Buffer-local backends will be computed when loading a major mode, so
+      ;; only specify a global default here.
+      company-backends '(company-capf)
 
-    ;; These auto-complete the current selection when
-    ;; `company-auto-commit-chars' is typed. This is too magical. We
-    ;; already have the much more explicit RET and TAB.
-    company-auto-commit nil
+      ;; These auto-complete the current selection when
+      ;; `company-auto-commit-chars' is typed. This is too magical. We
+      ;; already have the much more explicit RET and TAB.
+      company-auto-commit nil
 
-    ;; Only search the current buffer for `company-dabbrev' (a backend that
-    ;; suggests text your open buffers). This prevents Company from causing
-    ;; lag once you have a lot of buffers open.
-    company-dabbrev-other-buffers nil
-    ;; Make `company-dabbrev' fully case-sensitive, to improve UX with
-    ;; domain-specific words with particular casing.
-    company-dabbrev-ignore-case nil
-    company-dabbrev-downcase nil
-    company-idle-delay 0)  ; No delay in showing suggestions
+      ;; Only search the current buffer for `company-dabbrev' (a backend that
+      ;; suggests text your open buffers). This prevents Company from causing
+      ;; lag once you have a lot of buffers open.
+      company-dabbrev-other-buffers nil
+      ;; Make `company-dabbrev' fully case-sensitive, to improve UX with
+      ;; domain-specific words with particular casing.
+      company-dabbrev-ignore-case nil
+      company-dabbrev-downcase nil
+      company-idle-delay 0)  ; No delay in showing suggestions
 
 ;; include babel support
 ;;(after! org
@@ -401,21 +403,24 @@
 
 (setq +latex-viewers '(pdf-tools))
 
-; If we are workig on a machine with macOS
+(setq org-latex-pdf-process
+      '("latexmk -xelatex -interaction=nonstopmode -output-directory=%o %f"))
+
+;; If we are workig on a machine with macOS
 (if IS-MAC
-(when (fboundp 'mac-auto-operator-composition-mode)
-(setq   (mac-auto-operator-composition-mode t)
-        doom-font (font-spec :family "Fira Code" :size 13)
-        doom-unicode-font (font-spec :family "Fira Mono" :size 13)
-        doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13)
-        global-prettify-symbols-mode nil)
-;; pretty-symbols are not working. This should be fixed!
-)
-)
+    (when (fboundp 'mac-auto-operator-composition-mode)
+      (setq   (mac-auto-operator-composition-mode t)
+              doom-font (font-spec :family "Fira Code" :size 13)
+              doom-unicode-font (font-spec :family "Fira Mono" :size 13)
+              doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13)
+              global-prettify-symbols-mode nil)
+      ;; pretty-symbols are not working. This should be fixed!
+      )
+  )
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
-  :hook (prog-mode . copilot-mode)
+  ;; :hook (prog-mode . copilot-mode) ;; comment this line to disable by default
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
@@ -446,16 +451,16 @@
       ;; hide documentation
       "c h" #'lsp-ui-doc-hide
       ;; focus frame docs
-      ;"c s f" #'lsp-ui-doc-focus-frame
+                                        ;"c s f" #'lsp-ui-doc-focus-frame
       "c F" #'lsp-ui-doc-focus-frame
       ;; unfocus frame docs
-      ;"c s u" #'lsp-ui-doc-unfocus-frame
+                                        ;"c s u" #'lsp-ui-doc-unfocus-frame
       "c U" #'lsp-ui-doc-unfocus-frame
       )
 
 ;; remap magit
-(map! :map magit-mode-map
-      :nv "z" #'magit-file-checkout)
+;;(map! :map magit-mode-map
+;;      :nv "z" #'magit-file-checkout)
 
 ;; zsh
 (defun zsh ()
@@ -464,25 +469,27 @@
 (global-set-key (kbd "C-c t") 'zsh)
 
 ;; ellama
-(use-package ellama
-  :init
-  ;; setup key bindings
-  (setopt ellama-keymap-prefix "C-c e")
-  ;; language you want ellama to translate to
-  (setopt ellama-language "English")
-  (require 'llm-ollama)
-  ;; this model should be pulled to use it
-  ;; value should be the same as you print in terminal during pull
-  (setopt ellama-provider
-		  (make-llm-ollama
-		   :chat-model "llama3.2" :embedding-model "lamma3.2"
-                   )))
+(load "~/.dotfiles/doom/.doom.d/package_configs/ellama-complete-config.el")
+;; (use-package ellama
+;;   :init
+;;   ;; setup key bindings
+;;   (setopt ellama-keymap-prefix "C-c e")
+;;   ;; language you want ellama to translate to
+;;   (setopt ellama-language "English")
+;;   (require 'llm-ollama)
+;;   ;; this model should be pulled to use it
+;;   ;; value should be the same as you print in terminal during pull
+;;   (setopt ellama-provider
+;; 	  (make-llm-ollama
+;; 	   :chat-model "llama3.2" :embedding-model "lamma3.2"
+;;            )))
 
 ;; gptel
 (load (expand-file-name "secrets.el" doom-user-dir) t t)
 (use-package gptel
- :config
- (setq! gptel-api-key nil))
+  ;; :config
+  ;; (setq! gptel-api-key nil)
+  )
 ;; OPTIONAL configuration
 (setq
  gptel-model 'gemma3:latest
@@ -493,9 +500,19 @@
                            gemma3:latest
                            lamma3.2:latest
                            deepseek-r1:latest
+                           qwen:7b
+                           qwen3-coder:30b
                            )))
 
-(gptel-make-gemini "Gemini" :key my-gemini-api-key :stream t)
+(gptel-make-gemini "Gemini"
+  :stream t
+  :key my-gemini-api-key )
+(gptel-make-anthropic "Claude"          ;Any name you want
+  :stream t                             ;Streaming responses
+  :key my-claude-api-key )
+(gptel-make-deepseek "deepseek"          ;Any name you want
+  :stream t                             ;Streaming responses
+  :key my-deepseek-api-key )
 
 (defun org-export-to-html-and-commit ()
   "Export the current Org file to HTML and update the Git project."
@@ -538,15 +555,15 @@
       (call-process "python3" nil "*PieChart Output*" t python-script temp-file output-file)
       ;; insert the results below the table
       (if (file-exists-p output-file)
-        (save-excursion
-                (goto-char (org-table-end))
-                (insert "\n#+RESULTS:\n")
-                (insert (concat "[[file:" output-file "]]\n"))
-        ;; Clean up the temporary file
-        (delete-file temp-file)
-        ;; Optionally refresh Org inline images
-        (org-display-inline-images))
-     (message "Error: Pie chart was not generated.")))))
+          (save-excursion
+            (goto-char (org-table-end))
+            (insert "\n#+RESULTS:\n")
+            (insert (concat "[[file:" output-file "]]\n"))
+            ;; Clean up the temporary file
+            (delete-file temp-file)
+            ;; Optionally refresh Org inline images
+            (org-display-inline-images))
+        (message "Error: Pie chart was not generated.")))))
 
 ;; pyenv
 (use-package! pyvenv
@@ -555,6 +572,9 @@
   ;;(setq pyvenv-workon "~/.pyenv/versions/")      ;; Ensure compatibility with Pyenv
   (pyvenv-tracking-mode 1)
   )                      ;; Auto-detect venv when opening a Python file
+
+;; should autoactivate venv
+(add-hook 'python-mode-hook #'pyvenv-track-virtualenv)
 
 
 ;; spell
@@ -568,10 +588,68 @@
 (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
 (setq nerd-icons-scale-factor 1.1)
 (setq doom-modeline-lsp-icon t)
-;(setq doom-modeline-env-version t)
+                                        ;(setq doom-modeline-env-version t)
 (setq doom-modeline-check-icon t)
 (setq doom-modeline-major-mode-icon t)
 (custom-set-faces!
   '(mode-line :height 1.0)
   '(mode-line-inactive :height 1.0))
 ;;(setq doom-modeline-position-column-line-format nil)
+
+;; aider config
+(use-package! aidermacs
+  :config
+  ;; Backend (vterm is better but requires compilation)
+  (setq aidermacs-backend 'comint)  ; or 'vterm if you have it
+  
+  ;; Use architect mode by default (design before coding)
+  (setq aidermacs-architect-mode t)
+  
+  ;; Auto-apply architect suggestions (or nil to review each)
+  (setq aidermacs-architect-auto-apply nil)  ; Review before applying
+  
+  ;; Default Aider arguments
+  (setq aidermacs-aider-args
+        '("--model" "qwen3-coder:30b"  ; Or your preferred model
+          "--dark-mode"
+          "--no-auto-commits"))  ; We'll commit manually after review
+  
+  ;; Keybindings
+  (map! :leader
+        (:prefix ("a" . "ai")
+         :desc "Aidermacs menu" "a" #'aidermacs-transient
+         :desc "Add current file" "f" #'aidermacs-add-current-file
+         :desc "Add directory" "d" #'aidermacs-add-directory)))
+
+
+;; Load transient early to prevent autoload errors
+                                        ; (require 'transient nil t)
+
+                                        ; ;; ai-code config
+                                        ; (use-package! transient
+                                        ;   :defer t)
+
+                                        ; (use-package! ai-code
+                                        ;   ;; :straight (:host github :repo "tninja/ai-code-interface.el") ;; if you want to use straight to install, no need to have MELPA setting above
+                                        ;   :after transient
+                                        ;   :config
+                                        ;   ;; use codex as backend, other options are 'claude-code, 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'cursor, 'kiro, 'codebuddy, 'aider, 'agent-shell, 'claude-code-ide, 'claude-code-el
+                                        ;   ;; (ai-code-set-backend 'codex)
+                                        ;   (require 'ai-code)
+                                        ;   (ai-code-set-backend 'aider)
+                                        ;   ;; Enable global keybinding for the main menu
+                                        ;   (global-set-key (kbd "C-c a") #'ai-code-menu)
+                                        ;   ;; Optional: Use eat if you prefer, by default it is vterm
+                                        ;   ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; config for native CLI backends. for external backends such as agent-shell, claude-code-ide.el and claude-code.el, please check their own config
+                                        ;   ;; Optional: Enable @ file completion in comments and AI sessions
+                                        ;   (ai-code-prompt-filepath-completion-mode 1)
+                                        ;   ;; Optional: Ask AI to run test after code changes, for a tighter build-test loop
+                                        ;   (setq ai-code-auto-test-type 'ask-me)
+                                        ;   ;; Optional: In AI session buffers, SPC in Evil normal state triggers the prompt-enter UI
+                                        ;   (with-eval-after-load 'evil (ai-code-backends-infra-evil-setup))
+                                        ;   ;; Optional: Turn on auto-revert buffer, so that the AI code change automatically appears in the buffer
+                                        ;   (global-auto-revert-mode 1)
+                                        ;   (setq auto-revert-interval 1) ;; set to 1 second for faster update
+                                        ;   ;; Optional: Set up Magit integration for AI commands in Magit popups
+                                        ;   (with-eval-after-load 'magit
+                                        ;     (ai-code-magit-setup-transients)))

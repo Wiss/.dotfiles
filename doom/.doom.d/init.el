@@ -25,7 +25,7 @@
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
        ;;(ivy +prescient -childframe
-      ;;-fuzzy +icons)       ; a search engine for love and life
+       ;;-fuzzy +icons)       ; a search engine for love and life
        (vertico +icons)           ; the search engine of the future
 
        :ui
@@ -91,8 +91,8 @@
        ;;ansible
        biblio            ; Writes a PhD for you (citation needed)
        debugger          ; FIXME stepping through code, to help you add bugs
-       ;;direnv
-       ;;docker
+       direnv
+       docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
