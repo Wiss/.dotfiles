@@ -43,6 +43,8 @@ sudo apt-get install -y dvipng
 sudo apt install nodejs && install npm && npm install -g pyright
 ##sudo apt install nodejs
 ##sudo apt install npm
+# for web and js formating
+sudo npm install -g prettier
 
 ## then install copilot
 M-x copilot-install-server
@@ -71,5 +73,5 @@ sudo apt-get install texlive-full
 sudo apt-get install aspell-es
 ## use ispell-change-dictionary to change dicts
 
-# get lsp support
-sudo apt-get install python3-pylsp
+# get lsp support. DEPRECATED, moved to pyright
+# sudo apt-get install python3-pylsp
