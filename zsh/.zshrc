@@ -309,3 +309,8 @@ function ros_autocompletion() {
     eval "$(/usr/bin/register-python-argcomplete colcon)"
 }
 # <<< ros2 <<<
+# export secrets
+# Load API keys (if file exists)
+if [ -f ~/.zsh_secrets ]; then
+    source ~/.zsh_secrets
+fi
