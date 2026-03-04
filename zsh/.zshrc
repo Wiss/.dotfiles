@@ -255,7 +255,7 @@ alias sourcews="source ./install/local_setup.zsh"
 alias r="ros2"
 alias show="wezterm imgcat"
 alias doomup="doom upgrade && doom sync"
-alias gitlog="git log --oneline --graph"
+alias gitlog="git log --oneline --graph --color --all --decorate"
 
 # if nvim is available use it instead
 if type nvim 2>&1 >/dev/null ; then
