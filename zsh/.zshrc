@@ -309,6 +309,13 @@ function ros_autocompletion() {
     eval "$(/usr/bin/register-python-argcomplete colcon)"
 }
 # <<< ros2 <<<
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+# direnv (a bit more general than pyenv)
+eval "$(direnv hook zsh)"
+
 # export secrets
 # Load API keys (if file exists)
 if [ -f ~/.zsh_secrets ]; then

@@ -88,6 +88,24 @@
   (lsp-diagnostics-flycheck-enable)
   (flycheck-add-next-checker 'lsp '(t . python-flake8)))
 
+;; ;; enable djlint for html files
+;; (after! apheleia
+;;   ;; Register djlint formatter
+;;   (pushnew! apheleia-formatters
+;;             '(djlint . ("djlint" "--reformat" "-")))
+
+;;   ;; Use djlint for web-mode
+;;   (setf (alist-get 'web-mode apheleia-mode-alist)
+;;         '(djlint)))
+
+;; (after! web-mode
+;;   (add-hook 'web-mode-hook
+;;             (lambda ()
+;;               ;; Disable LSP formatting
+;;               (setq-local lsp-format-buffer-on-save nil)
+
+;;               ;; Ensure Apheleia handles formatting
+;;               (apheleia-mode +1))))
 
 ;; enable org-id-link-to-org-use-id for linking id properties
 (setq org-id-link-to-org-use-id 'use-existing)
@@ -390,10 +408,9 @@
 ;;(set-file-template! "/project_*+\\.org$" :trigger "__project_custom.org" :mode 'org-mode)
 
 ;; wakatime
-(use-package wakatime-mode
-  :ensure t)
-;; enable for all buffers
-(global-wakatime-mode)
+(use-package! wakatime-mode
+  :config
+  (global-wakatime-mode))
 
 ;; pdf-tools
 (use-package pdf-tools
@@ -420,7 +437,7 @@
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
-  ;; :hook (prog-mode . copilot-mode) ;; comment this line to disable by default
+  :hook (prog-mode . copilot-mode) ;; comment this line to disable by default
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
@@ -513,6 +530,9 @@
 (gptel-make-deepseek "deepseek"          ;Any name you want
   :stream t                             ;Streaming responses
   :key my-deepseek-api-key )
+(gptel-make-openai "openai"          ;Any name you want
+  :stream t                             ;Streaming responses
+  :key my-openai-api-key )
 
 (defun org-export-to-html-and-commit ()
   "Export the current Org file to HTML and update the Git project."
@@ -616,8 +636,8 @@
   
   ;; Keybindings
   (map! :leader
-        (:prefix ("a" . "ai")
-         :desc "Aidermacs menu" "a" #'aidermacs-transient
+        (:prefix-map ("a" . "ai")
+         :desc "Aidermacs menu" "a" #'aidermacs-transient-menu
          :desc "Add current file" "f" #'aidermacs-add-current-file
          :desc "Add directory" "d" #'aidermacs-add-directory)))
 
